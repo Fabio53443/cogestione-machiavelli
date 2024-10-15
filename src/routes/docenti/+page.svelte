@@ -9,7 +9,7 @@
 </script>
 
 <div
-    class="container mx-auto flex flex-col items-center justify-center min-h-screen p-4"
+    class="container mx-auto flex flex-col items-center justify-center p-4"
 >
     <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-4">
         Portale Docenti

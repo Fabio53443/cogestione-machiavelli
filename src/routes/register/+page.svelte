@@ -10,41 +10,57 @@
     };
 </script>
 
-<div class="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-4">Registrati</h1>
-    <form on:submit={handleRegister} class="max-w-md w-full">
-        <input
-            type="text"
-            name="username"
-            placeholder="Nome utente"
-            class="border border-gray-300 rounded-lg p-2 w-full mb-4"
-            required
-        />
-        <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            class="border border-gray-300 rounded-lg p-2 w-full mb-4"
-            required
-        />
-        <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            class="border border-gray-300 rounded-lg p-2 w-full mb-4"
-            required
-        />
-        <button
-            type="submit"
-            class="bg-[#FB773C] text-white rounded-lg p-2 w-full hover:bg-[#EB3678] transition duration-200"
-        >
-            Registrati
-        </button>
-    </form>
+<div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
+    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-8">Registrati</h1>
+    <div class="w-full max-w-md">
+        <form on:submit={handleRegister} class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Nome utente
+                </label>
+                <input
+                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Nome utente"
+                    required
+                />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email
+                </label>
+                <input
+                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                />
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <input
+                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="******************"
+                    required
+                />
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full transition duration-200"
+                    type="submit"
+                >
+                    Registrati
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-
-<style>
-    h1, p, input {
-        color: black; /* Change text color to black */
-    }
-</style>

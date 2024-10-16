@@ -1,6 +1,6 @@
 <script>
     import Alert from "$lib/components/Alert.svelte";
-
+    import Cookies from 'js-cookie';
     let showAlert = false;
     let alertMessage = "";
     let alertType;
@@ -23,6 +23,8 @@
             if (result.success) {
                 alertType = "success";
                 alertMessage = "Login successful!";
+                Cookies.set('token', result.token, { expires: 7, secure: true, sameSite: 'Strict' });
+                window.location.href = "/studente/dashboard";
             } else {
                 alertType = "error";
                 alertMessage = result.message || "Login failed.";

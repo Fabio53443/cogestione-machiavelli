@@ -1,16 +1,27 @@
 <script>
     import Alert from "$lib/components/Alert.svelte";
+    import { onMount } from "svelte";
 
     let showAlert = false;
     let alertMessage = "";
     let alertType = "info";
+    let emailInput = "";
+    let emailInputElement;
+    const suffix = "@spallanzanitivoli.edu.it";
+
+    $: fullEmail = emailInput + suffix;
+
+    onMount(() => {
+        if (emailInputElement) {
+            emailInputElement.addEventListener("input", handleEmailInput);
+        }
+    });
 
     const handleRegister = async (event) => {
         event.preventDefault();
 
         const username = event.target.elements.username.value;
         const nome = event.target.elements.nome.value;
-        const email = event.target.elements.email.value;
         const password = event.target.elements.password.value;
 
         try {
@@ -19,7 +30,12 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username, nome, email, password }),
+                body: JSON.stringify({
+                    username,
+                    nome,
+                    email: fullEmail,
+                    password,
+                }),
             });
 
             const result = await response.json();
@@ -37,6 +53,10 @@
         } finally {
             showAlert = true;
         }
+    };
+
+    const handleEmailInput = (event) => {
+        emailInput = event.target.value.replace(suffix, "");
     };
 </script>
 
@@ -91,14 +111,23 @@
                 >
                     Email
                 </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                />
+                <div class="relative">
+                    <input
+                        bind:this={emailInputElement}
+                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                        id="email"
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        bind:value={emailInput}
+                    />
+                    <span
+                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
+                    >
+                        {suffix}
+                    </span>
+                </div>
             </div>
             <div class="mb-6">
                 <label

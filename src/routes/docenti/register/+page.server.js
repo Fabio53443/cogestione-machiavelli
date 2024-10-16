@@ -1,5 +1,5 @@
 export function load() {
     return {
-      pageName: 'Registrazione per studenti', 
+      pageName: 'Registrazione per docenti', 
     };
   }

@@ -24,6 +24,7 @@
 		"dotenv": "^16.4.5",
 		"drizzle-orm": "^0.34.1",
 		"jose": "^5.9.4",
+		"js-cookie": "^3.0.5",
 		"pg": "^8.13.0",
 		"postgres": "^3.4.4",
 		"svelte-preprocess": "^6.0.3"

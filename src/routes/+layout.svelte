@@ -2,14 +2,21 @@
     import "../app.css";
     import favicon from "../favicon.png";
     import { page } from "$app/stores";
+    import { onMount } from "svelte";
     $: pageName = $page.data.pageName;
+    $: user = $page.data.user;
+    onMount(() => {
+        console.log(user);
+    });
 </script>
 
 <svelte:head>
-   <title>{pageName}</title>
+    <title>{pageName}</title>
 </svelte:head>
 
-<main class="min-h-screen flex flex-col bg-gradient-to-b from-[#180161] to-[#4F1787]">
+<main
+    class="min-h-screen flex flex-col bg-gradient-to-b from-[#180161] to-[#4F1787]"
+>
     <header class="bg-[#4F1787] shadow-lg">
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col sm:flex-row items-center justify-between">
@@ -29,11 +36,39 @@
                         {pageName}
                     </h1>
                 </div>
+                {#if !user}
                 <nav class="flex space-x-4">
-                    <a href="/login" class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg">Accedi</a>
-                    <a href="/register" class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg">Registrati</a>
-                    <a href="/docenti" class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg">Portale Docenti</a>
+                    <a
+                        href="/login"
+                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        >Accedi</a
+                    >
+                    <a
+                        href="/register"
+                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        >Registrati</a
+                    >
+                    <a
+                        href="/docenti"
+                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        >Portale Docenti</a
+                    >
                 </nav>
+                {:else}
+                <nav class="flex space-x-4">
+                    <a
+                        href="/docenti"
+                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        >Portale Docenti</a
+                    >
+                    <a
+                        href="/logout"
+                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        >Esci</a
+                    >
+                </nav>
+                
+                {/if}
             </div>
         </div>
     </header>
@@ -44,7 +79,7 @@
 
     <footer class="bg-[#4F1787] text-gray-100 py-4 mt-auto">
         <div class="container mx-auto px-4 text-center text-sm">
-            Copyright &copy; 2024 
+            Copyright &copy; 2024
             <a
                 href="https://smartlinux.xyz"
                 target="_blank"
@@ -58,10 +93,10 @@
 </main>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
 
     :global(body) {
-        font-family: 'Ubuntu', sans-serif;
+        font-family: "Ubuntu", sans-serif;
         color: white;
         margin: 0;
     }

@@ -26,7 +26,7 @@
         const secretCode = event.target.elements.secretCode.value;
 
         try {
-            const response = await fetch("/api/register", {
+            const response = await fetch("/api/docenti/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -19,12 +19,14 @@ export const studenti = pgTable('studenti', {
 
 export const corsi = pgTable('corsi', {
   id: serial('id').primaryKey(),
-  docente: integer('docente').notNull().references(() => professori.id),
+  docente: varchar('docente').notNull().references(() => professori.username),
   nome: varchar('nome', { length: 255 }).notNull(),
   descrizione: text('descrizione'),
   aula: varchar('aula', { length: 100 }),
   numPosti: integer('num_posti').notNull(),
   ora: varchar('ora', { length: 100 }).notNull(),
+  postiDisponibili: integer('posti_disponibili').notNull().default(0),
+  length: integer('length').notNull().default(1),
   giorno: varchar('giorno', { length: 100 }).notNull(),
 });
 

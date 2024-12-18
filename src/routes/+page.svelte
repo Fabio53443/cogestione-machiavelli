@@ -5,11 +5,12 @@
         // You can handle the search logic here (e.g., redirect, filter, etc.)
         console.log("Searching for:", name);
     };
+    let nomescuola = "John cicciofischio university";
 </script>
 
 <div class="max-w-2xl mx-auto text-center">
     <h1 class="text-4xl font-bold mb-6 text-[#EB3678]">
-        Benvenuti alla Cogestione dello Spallanzani
+        Benvenuti alla Cogestione della {nomescuola}
     </h1>
     <p class="text-xl mb-8 text-gray-300">
         Esplora, partecipa e connettiti con la comunità scolastica.

@@ -24,14 +24,15 @@ export const corsi = pgTable('corsi', {
   descrizione: text('descrizione'),
   aula: varchar('aula', { length: 100 }),
   numPosti: integer('num_posti').notNull(),
-  ora: varchar('ora', { length: 100 }).notNull(),
   postiDisponibili: integer('posti_disponibili').notNull().default(0),
   length: integer('length').notNull().default(1),
-  giorno: varchar('giorno', { length: 100 }).notNull(),
+  availability: text('availability').notNull().array().default(sql`ARRAY[]::text[]`),
 });
 
 export const iscrizioni = pgTable('iscrizioni', {
   id: serial('id').primaryKey(),
+  ora: varchar('ora', { length: 100 }).notNull(),
+  giorno: varchar('giorno', { length: 100 }).notNull(),
   idStudente: integer('id_studente').notNull().references(() => studenti.id),
   idCorso: integer('id_corso').notNull().references(() => corsi.id),
 });

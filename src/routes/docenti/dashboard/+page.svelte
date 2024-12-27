@@ -1,209 +1,54 @@
 <script>
-    import Alert from "$lib/components/Alert.svelte";
-    
-    let showAlert = false;
-    let alertMessage = "";
-    let alertType;
-
-    let formData = {
-        nome: '',
-        descrizione: '',
-        aula: '',
-        numPosti: '',
-        length: '',
-        availability: []
+    export let data;
+    const { user, corsi, error } = data;
+  
+    const navigateToCourseCreation = () => {
+      window.location.href = '/docenti/newCourse/';
     };
-
-    const giorni = [
-        { id: 0, name: 'Lunedì' },
-        { id: 1, name: 'Martedì' },
-        { id: 2, name: 'Mercoledì' },
-        { id: 3, name: 'Giovedì' },
-        { id: 4, name: 'Venerdì' },
-        { id: 5, name: 'Sabato' },
-        { id: 6, name: 'Domenica' }
-    ];
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-        try {
-            const response = await fetch('/api/docenti/newCourse', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                alertType = "success";
-                alertMessage = "Corso creato con successo!";
-                // Reset form
-                formData = {
-                    nome: '',
-                    descrizione: '',
-                    aula: '',
-                    numPosti: '',
-                    length: '',
-                    availability: []
-                };
-            } else {
-                alertType = "error";
-                alertMessage = result.message || "Creazione corso fallita.";
-            }
-        } catch (error) {
-            alertType = "error";
-            alertMessage = "Si è verificato un errore imprevisto.";
-        } finally {
-            showAlert = true;
-        }
-    }
-
-    function handleGiornoToggle(giornoId) {
-        const index = formData.availability.indexOf(giornoId);
-        if (index === -1) {
-            formData.availability = [...formData.availability, giornoId];
-        } else {
-            formData.availability = formData.availability.filter(id => id !== giornoId);
-        }
-    }
-</script>
-
-<Alert type={alertType} message={alertMessage} show={showAlert} />
-
-<div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
-    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-8">Crea Nuovo Corso</h1>
-    <div class="w-full max-w-md">
-        <form 
-            on:submit={handleSubmit}
-            class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
-        >
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="nome"
-                >
-                    Nome del Corso
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="nome"
-                    type="text"
-                    bind:value={formData.nome}
-                    placeholder="Nome del corso"
-                    required
-                />
-            </div>
-
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="descrizione"
-                >
-                    Descrizione
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="descrizione"
-                    bind:value={formData.descrizione}
-                    placeholder="Descrizione del corso"
-                    rows="4"
-                    required
-                />
-            </div>
-
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="aula"
-                >
-                    Aula
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="aula"
-                    type="text"
-                    bind:value={formData.aula}
-                    placeholder="Numero o nome dell'aula"
-                    required
-                />
-            </div>
-
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="numPosti"
-                >
-                    Numero di Posti
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="numPosti"
-                    type="number"
-                    bind:value={formData.numPosti}
-                    min="1"
-                    placeholder="Numero di posti disponibili"
-                    required
-                />
-            </div>
-
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="length"
-                >
-                    Durata (minuti)
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="length"
-                    type="number"
-                    bind:value={formData.length}
-                    min="1"
-                    placeholder="Durata in minuti"
-                    required
-                />
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2">
-                    Giorni Disponibili
-                </label>
-                <div class="grid grid-cols-2 gap-2">
-                    {#each giorni as giorno}
-                        <label class="inline-flex items-center">
-                            <input
-                                type="checkbox"
-                                checked={formData.availability.includes(giorno.id)}
-                                on:change={() => handleGiornoToggle(giorno.id)}
-                                class="form-checkbox h-5 w-5 text-[#EB3678] rounded border-gray-300 focus:ring-[#EB3678]"
-                            />
-                            <span class="ml-2 text-gray-700">{giorno.name}</span>
-                        </label>
-                    {/each}
+  </script>
+  
+  <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
+    <div class="w-full max-w-4xl">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-[#EB3678]">Dashboard Corsi</h1>
+        <button 
+          on:click={navigateToCourseCreation}
+          class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">
+          Crea un nuovo corso
+        </button>
+      </div>
+  
+      <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-6">Benvenuto, {user.username}</h2>
+        
+        {#if error}
+          <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+            {error}
+          </div>
+        {:else if corsi.length === 0}
+          <div class="text-center py-8">
+            <p class="text-gray-600 text-lg mb-4">Non hai ancora creato nessun corso.</p>
+            <a 
+              href="/docente/corsi/crea"
+              class="inline-block bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"
+            >
+              Crea un nuovo corso
+            </a>
+          </div>
+        {:else}
+          <ul>
+            {#each corsi as corso}
+              <li class="mb-4">
+                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+                  <h3 class="text-xl font-bold text-gray-800">{corso.nome}</h3>
+                  <p class="text-gray-600">{corso.descrizione}</p>
+                  <p class="text-gray-600">Aula: {corso.aula}</p>
+                  <p class="text-gray-600">Posti disponibili: {corso.postiDisponibili}/{corso.numPosti}</p>
                 </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-                <button
-                    class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full transition duration-200"
-                    type="submit"
-                >
-                    Crea Corso
-                </button>
-            </div>
-        </form>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
     </div>
-</div>
-
-<style>
-    input[type="checkbox"] {
-        cursor: pointer;
-    }
-    
-    button:hover {
-        cursor: pointer;
-    }
-</style>
+  </div>

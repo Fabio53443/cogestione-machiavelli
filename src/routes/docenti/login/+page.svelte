@@ -55,14 +55,14 @@
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="username"
                 >
-                    Nome utente
+                    Email
                 </label>
                 <input
                     class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
                     id="username"
                     type="text"
                     name="username"
-                    placeholder="Nome utente"
+                    placeholder="email"
                     required
                 />
             </div>

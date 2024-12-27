@@ -1,6 +1,6 @@
 <script>
     import Alert from "$lib/components/Alert.svelte";
-    import Cookies from 'js-cookie';
+    import Cookies from "js-cookie";
     let showAlert = false;
     let alertMessage = "";
     let alertType;
@@ -23,7 +23,11 @@
             if (result.success) {
                 alertType = "success";
                 alertMessage = "Login successful!";
-                Cookies.set('token', result.token, { expires: 7, secure: true, sameSite: 'Strict' });
+                Cookies.set("token", result.token, {
+                    expires: 7,
+                    secure: true,
+                    sameSite: "Strict",
+                });
                 window.location.href = "/studente/dashboard";
             } else {
                 alertType = "error";
@@ -35,7 +39,6 @@
         } finally {
             showAlert = true;
         }
-        
     };
 </script>
 
@@ -55,14 +58,14 @@
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="username"
                 >
-                    Nome utente
+                    Email
                 </label>
                 <input
                     class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
                     id="username"
                     type="text"
                     name="username"
-                    placeholder="Nome utente"
+                    placeholder="Email"
                     required
                 />
             </div>

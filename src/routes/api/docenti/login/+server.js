@@ -21,7 +21,7 @@ export const POST = async ({ request }) => {
             hashedPass: professori.hashedPass
         })
         .from(professori)
-        .where(eq(professori.username, username));
+        .where(eq(professori.email, username));
 
         if (result.length === 0) {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });

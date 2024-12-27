@@ -5,9 +5,9 @@ import { professori } from '$lib/db/models';
 export const POST = async ({ request }) => {
     try {
         const formData = await request.json();
-        const { username, nome, email, password, secretCode } = formData;
+        const { nome, email, password, secretCode } = formData;
 
-        if (!username || !nome || !email || !password) {
+        if ( !nome || !email || !password) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
         if (secretCode !== 'skibidi') {
@@ -19,11 +19,10 @@ export const POST = async ({ request }) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Log before inserting into the database
-        console.log('Inserting into DB:', { username, nome, email, hashedPassword });
+        console.log('Inserting into DB:', {  nome, email, hashedPassword });
 
         // Insert the new user into the database
         await db.insert(professori).values({
-            username,
             nomeCompleto: nome,
             email,
             hashedPass: hashedPassword

@@ -20,7 +20,6 @@
     const handleRegister = async (event) => {
         event.preventDefault();
 
-        const username = event.target.elements.username.value;
         const nome = event.target.elements.nome.value;
         const password = event.target.elements.password.value;
 
@@ -31,7 +30,6 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username,
                     nome,
                     email: fullEmail,
                     password,
@@ -75,20 +73,7 @@
             class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
         >
             <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="username"
-                >
-                    username utente
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="Username utente"
-                    required
-                />
+                
                 <label
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="nome"

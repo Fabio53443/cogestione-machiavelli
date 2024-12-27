@@ -1,36 +1,39 @@
 {
-	"name": "cogestione",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"db:push": "drizzle-kit push",
-		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"autoprefixer": "^10.4.20",
-		"drizzle-kit": "^0.25.0",
-		"postcss": "^8.4.47",
-		"svelte": "^4.2.7",
-		"tailwindcss": "^3.4.9",
-		"vite": "^5.0.3"
-	},
-	"type": "module",
-	"dependencies": {
-		"@sveltejs/adapter-node": "^5.2.7",
-		"bcrypt": "^5.1.1",
-		"dotenv": "^16.4.5",
-		"drizzle-orm": "^0.34.1",
-		"jose": "^5.9.4",
-		"js-cookie": "^3.0.5",
-		"pg": "^8.13.0",
-		"postgres": "^3.4.4",
-		"svelte-preprocess": "^6.0.3"
-	}
+  "name": "cogestione",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "autoprefixer": "^10.4.20",
+    "drizzle-kit": "^0.25.0",
+    "postcss": "^8.4.47",
+    "svelte": "^4.2.7",
+    "tailwindcss": "^3.4.9",
+    "vite": "^5.0.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "@sveltejs/adapter-node": "^5.2.7",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.34.1",
+    "jose": "^5.9.4",
+    "js-cookie": "^3.0.5",
+    "pg": "^8.13.0",
+    "postgres": "^3.4.4",
+    "svelte-preprocess": "^6.0.3"
+  },
+  "trustedDependencies": [
+    "svelte-preprocess"
+  ]
 }

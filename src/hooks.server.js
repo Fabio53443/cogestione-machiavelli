@@ -1,16 +1,28 @@
 // src/hooks.server.js
 import { jwtVerify } from 'jose';
+import { rollupVersion } from 'vite';
 
 export async function handle({ event, resolve }) {
-    const token = event.cookies.get('token');
-    const jwtSecret = new TextEncoder().encode(process.env.JWT_SECRET); // Convert secret to Uint8Array
+    let token = event.cookies.get('token');
+    
+    if (!token) {
+        const authHeader = event.request.headers.get('authorization');
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            token = authHeader.substring(7); 
+        }
+    }
+
+    const jwtSecret = new TextEncoder().encode(process.env.JWT_SECRET);
 
     if (token) {
         try {
             const { payload } = await jwtVerify(token, jwtSecret);
-            event.locals.user = { username: payload.username, id: payload.id }; // Access the username from the payload
+            event.locals.user = {
+                username: payload.username,
+                id: payload.id,
+                role: payload.role
+            };
         } catch (err) {
-            // Token is invalid or expired
             event.locals.user = null;
         }
     } else {

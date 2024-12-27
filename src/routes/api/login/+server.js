@@ -24,14 +24,14 @@ export const POST = async ({ request }) => {
         .from(studenti)
         .where(eq(studenti.email, username));
 
-        if (result[0].hashedPass.length === 0) {
+        if (result.length === 0) {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });
         }
 
         if (!bcrypt.compareSync(password, result[0].hashedPass)) {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });
         }
-        const id = result[0].id
+        const id = result[0].id;
         const token = await new SignJWT({ username, id , role: 'studente' })
             .setProtectedHeader({ alg: 'HS256' })
             .setIssuedAt()

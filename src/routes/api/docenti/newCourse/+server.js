@@ -9,6 +9,7 @@ import bcrypt from 'bcrypt';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export const POST = async ({ locals, request }) => {
+    console.log(locals)
     if (!locals.user || locals.user.role !== 'docente') {
         return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }

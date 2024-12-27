@@ -18,7 +18,7 @@ export const studenti = pgTable('studenti', {
 
 export const corsi = pgTable('corsi', {
   id: serial('id').primaryKey(),
-  docente: varchar('docente').notNull(),
+  docente: integer('docente').notNull().references(() => professori.id),
   nome: varchar('nome', { length: 255 }).notNull(),
   descrizione: text('descrizione'),
   aula: varchar('aula', { length: 100 }),

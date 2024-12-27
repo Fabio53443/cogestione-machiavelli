@@ -8,7 +8,7 @@ export async function handle({ event, resolve }) {
     if (token) {
         try {
             const { payload } = await jwtVerify(token, jwtSecret);
-            event.locals.user = { username: payload.username }; // Access the username from the payload
+            event.locals.user = { username: payload.username, id: payload.id }; // Access the username from the payload
         } catch (err) {
             // Token is invalid or expired
             event.locals.user = null;

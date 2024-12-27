@@ -9,6 +9,7 @@ export async function load({ locals }) {
   }
 
   try {
+    console.log(locals.user)
     // Get all courses the student is enrolled in
     const userIscrizioni = await db
       .select({

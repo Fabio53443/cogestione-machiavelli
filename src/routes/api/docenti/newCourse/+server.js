@@ -14,23 +14,25 @@ export const POST = async ({ locals, request }) => {
     }
     try {
         const formData = await request.json();
-        const { nome, descrizione, aula, numPosti, ora, giorno, length } = formData;
+        const { nome, descrizione, aula, numPosti, length, availability } = formData;
 
-        if (!nome || !descrizione || !aula || !numPosti || !ora || !giorno || !length) {
+        if (!nome || !descrizione || !aula || !numPosti || !availability || !length) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
+        
 
         await db.insert(corsi).values({
             nome,
             descrizione,
             aula,
             numPosti,
-            ora,
-            giorno,
             docente: locals.user.id,
             length,
-            postiDisponibili: numPosti
+            postiDisponibili: numPosti, 
+            availability
         });
+
+        
         return json({ success: true, message: 'Course registered successfully!' });
     } catch (error) {
         console.error('Error:', error);

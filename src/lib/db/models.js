@@ -1,6 +1,6 @@
 // src/db/models.js
 import { sql } from 'drizzle-orm';
-import { pgTable, serial, varchar, text, integer } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, text, integer, boolean } from 'drizzle-orm/pg-core';
 
 export const professori = pgTable('professori', {
   id: serial('id').primaryKey(),
@@ -34,4 +34,5 @@ export const iscrizioni = pgTable('iscrizioni', {
   giorno: varchar('giorno', { length: 100 }).notNull(),
   idStudente: integer('id_studente').notNull().references(() => studenti.id),
   idCorso: integer('id_corso').notNull().references(() => corsi.id),
+  presente: boolean('presente').notNull().default(false),
 });

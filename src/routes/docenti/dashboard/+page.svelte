@@ -29,7 +29,7 @@
           <div class="text-center py-8">
             <p class="text-gray-600 text-lg mb-4">Non hai ancora creato nessun corso.</p>
             <a 
-              href="/docente/corsi/crea"
+              href="/docenti/newCourse/"
               class="inline-block bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"
             >
               Crea un nuovo corso

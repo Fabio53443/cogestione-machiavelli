@@ -31,8 +31,8 @@ export const corsi = pgTable('corsi', {
 
 export const iscrizioni = pgTable('iscrizioni', {
   id: serial('id').primaryKey(),
-  ora: varchar('ora', { length: 100 }).notNull(),
-  giorno: varchar('giorno', { length: 100 }).notNull(),
+  ora: integer('ora').notNull(), // Changed to integer (1-4)
+  giorno: integer('giorno').notNull(), // Changed to integer (0-4 for days)
   idStudente: integer('id_studente').notNull().references(() => studenti.id),
   idCorso: integer('id_corso').notNull().references(() => corsi.id),
   presente: boolean('presente').notNull().default(false),

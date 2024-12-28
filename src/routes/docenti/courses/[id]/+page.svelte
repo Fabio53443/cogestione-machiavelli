@@ -1,10 +1,32 @@
 <script>
+  import AttendanceModal from '$lib/components/AttendanceModal.svelte';
   export let data;
-  const { corso, error, days } = data;
+  const { corso, error } = data;
+  let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+
+  let showAttendanceModal = false;
+  let selectedStudents = [];
+  let currentHour;
+  let currentDay;
 
   function barColor(free, total) {
-    // If no seats are free, show red
     return free === 0 ? 'bg-red-500' : 'bg-green-500';
+  }
+
+  async function openAttendanceModal(dayIndex, timeIndex) {
+    currentHour = timeIndex;
+    currentDay = dayIndex;
+    const response = await fetch(`/api/attendance/${corso.id}?hour=${currentHour}&day=${currentDay}`);
+    if (response.ok) {
+      selectedStudents = await response.json();
+      showAttendanceModal = true;
+    }
+  }
+
+  function handleAttendanceUpdate(updatedStudent) {
+    selectedStudents = selectedStudents.map(student => 
+      student.id === updatedStudent.id ? updatedStudent : student
+    );
   }
 </script>
 
@@ -19,10 +41,8 @@
     <p class="text-gray-600 mb-2"><strong>Aula:</strong> {corso.aula}</p>
     <p class="text-gray-600 mb-2"><strong>Posti disponibili:</strong> {corso.postiDisponibili}/{corso.numPosti}</p>
   </div>
+  
   {#if corso.schedule && corso.availability}
-    <script>
-      let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
-    </script>
 
     {#each days as day, dayIndex}
       {#if corso.availability.includes(dayIndex)}
@@ -33,12 +53,13 @@
               <tr>
                 <th class="py-3 w-24 text-left pl-4">Ora</th>
                 <th class="py-3 text-left">Posti</th>
+                <th class="py-3 w-24 text-right pr-4">Azioni</th>
               </tr>
             </thead>
             <tbody>
               {#each corso.schedule[dayIndex] as hourSeats, timeIndex}
-                <tr class="hover:bg-gray-100 hover:bg-opacity-20 transition-colors ">
-                    <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
+                <tr class="hover:bg-gray-100 hover:bg-opacity-20 transition-colors">
+                  <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
                   <td class="py-3">
                     <div class="flex items-center gap-4">
                       <div class="text-base whitespace-nowrap">
@@ -52,6 +73,14 @@
                       </div>
                     </div>
                   </td>
+                  <td class="py-3 text-right pr-4">
+                    <button
+                      class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                      on:click={() => openAttendanceModal(dayIndex, timeIndex)}
+                    >
+                      Presenze
+                    </button>
+                  </td>
                 </tr>
               {/each}
             </tbody>
@@ -60,4 +89,11 @@
       {/if}
     {/each}
   {/if}
+
+  <AttendanceModal
+    show={showAttendanceModal}
+    students={selectedStudents}
+    onClose={() => showAttendanceModal = false}
+    onUpdateAttendance={handleAttendanceUpdate}
+  />
 {/if}

@@ -20,8 +20,6 @@
         { id: 2, name: 'Mercoledì' },
         { id: 3, name: 'Giovedì' },
         { id: 4, name: 'Venerdì' },
-        { id: 5, name: 'Sabato' },
-        { id: 6, name: 'Domenica' }
     ];
 
     async function handleSubmit(event) {
@@ -154,22 +152,24 @@
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="length"
                 >
-                    Durata (minuti)
+                    Durata (ore ogni giorno)
                 </label>
                 <input
                     class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
                     id="length"
-                    type="number"
+                    type="slider"
                     bind:value={formData.length}
                     min="1"
-                    placeholder="Durata in minuti"
+                    max="5"
+                    placeholder="La durata in ore di ogni lezione"
                     required
                 />
             </div>
 
             <div class="mb-6">
+                <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="block text-gray-700 text-sm font-bold mb-2">
-                    Giorni Disponibili
+                    Tua disponibilità 
                 </label>
                 <div class="grid grid-cols-2 gap-2">
                     {#each giorni as giorno}

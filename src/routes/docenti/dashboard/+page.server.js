@@ -24,6 +24,7 @@ export async function load({ locals }) {
       numPosti: corso.numPosti,
       postiDisponibili: corso.postiDisponibili,
       availability: corso.availability,
+      schedule: corso.schedule,
     }));
 
     return {

@@ -9,19 +9,27 @@ import bcrypt from 'bcrypt';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export const POST = async ({ locals, request }) => {
-    console.log(locals)
     if (!locals.user || locals.user.role !== 'docente') {
         return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }
     try {
         const formData = await request.json();
-        const { nome, descrizione, aula, numPosti, length, availability, schedule  } = formData;
-        console.log(formData)
-        if (!nome || !descrizione || !aula || !numPosti || !availability || !length || !schedule) {
+        const { nome, descrizione, aula, numPosti, length, availability  } = formData;
+        
+
+        if (!nome || !descrizione || !aula || !numPosti || !availability || !length) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
         
+        let schedule = [];
 
+        for (let i = 0; i < 5; i++) {
+            if (availability.includes(i)) { 
+            schedule.push(Array(5).fill(numPosti));
+            } else {
+            schedule.push(Array(5).fill(0));
+            }
+        }
         await db.insert(corsi).values({
             nome,
             descrizione,
@@ -31,7 +39,7 @@ export const POST = async ({ locals, request }) => {
             length,
             postiDisponibili: numPosti, 
             availability, 
-            schedule
+            schedule: schedule
         });
 
         

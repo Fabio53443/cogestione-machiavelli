@@ -3,7 +3,7 @@
     const { user, corsi, error } = data;
   
     const navigateToCourseCreation = () => {
-      window.location.href = '/docenti/newCourse/';
+      window.location.href = '/docenti/courses/new';
     };
   </script>
   
@@ -29,7 +29,7 @@
           <div class="text-center py-8">
             <p class="text-gray-600 text-lg mb-4">Non hai ancora creato nessun corso.</p>
             <a 
-              href="/docenti/newCourse/"
+              href="/docenti/courses/new"
               class="inline-block bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"
             >
               Crea un nuovo corso
@@ -43,7 +43,6 @@
                   <h3 class="text-xl font-bold text-gray-800">{corso.nome}</h3>
                   <p class="text-gray-600">{corso.descrizione}</p>
                   <p class="text-gray-600">Aula: {corso.aula}</p>
-                  <p class="text-gray-600">Posti disponibili: {corso.postiDisponibili}/{corso.numPosti}</p>
                   <p class="text-gray-600">Posti disponibili: {corso.postiDisponibili}/{corso.numPosti}</p>
                   <a
                     href={`/docenti/courses/${corso.id}`}

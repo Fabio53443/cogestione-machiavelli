@@ -4,7 +4,6 @@ import { eq } from 'drizzle-orm';
 
 export async function load({ params, locals }) {
   const courseId = parseInt(params.id, 10);
-
   if (!locals.user) {
     return { corso: null, error: 'Utente non autenticato' };
   }
@@ -13,21 +12,23 @@ export async function load({ params, locals }) {
   const [course] = await db
     .select()
     .from(corsi)
-    .where(eq(corsi.id, courseId))
-    .where(eq(corsi.docente, locals.user.id));
+    .where(eq(corsi.id, courseId)); 
 
-  if (!course) {
+  if (!course || course.docente !== locals.user.id) {
     return { corso: null, error: 'Corso non trovato o non sei autorizzato a visualizzarlo' };
   }
 
   return {
+    pageName: 'Dettagli', 
     corso: {
       id: course.id,
       nome: course.nome,
       descrizione: course.descrizione,
       aula: course.aula,
       postiDisponibili: course.postiDisponibili,
-      numPosti: course.numPosti
+      numPosti: course.numPosti, 
+      schedule: course.schedule,
+      availability: course.availability,
     }
   };
 }

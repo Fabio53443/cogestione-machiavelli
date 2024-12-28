@@ -2,6 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/db/db.js';
 import { eq } from 'drizzle-orm';
 import { corsi } from '$lib/db/models.js';
+import { afterNavigate } from '$app/navigation';
 
 export async function load({ locals }) {
   if (!locals.user) {
@@ -15,14 +16,14 @@ export async function load({ locals }) {
       .select()
       .from(corsi)
       .where(eq(corsi.docente, locals.user.id));
-
     const corsiInsegnati = teacherCorsi.map(corso => ({
       id: corso.id,
       nome: corso.nome,
       descrizione: corso.descrizione,
       aula: corso.aula,
       numPosti: corso.numPosti,
-      postiDisponibili: corso.postiDisponibili
+      postiDisponibili: corso.postiDisponibili,
+      availability: corso.availability,
     }));
 
     return {

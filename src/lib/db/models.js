@@ -25,7 +25,8 @@ export const corsi = pgTable('corsi', {
   numPosti: integer('num_posti').notNull(),
   postiDisponibili: integer('posti_disponibili').notNull().default(0),
   length: integer('length').notNull().default(1),
-  availability: text('availability').notNull().array().default(sql`ARRAY[]::text[]`),
+  availability: integer('availability').notNull().array().default(sql`ARRAY[]::integer[]`),
+  schedule: integer('schedule').notNull().array().default(sql`ARRAY[ARRAY[0, 0, 0, 0, 0], ARRAY[0, 0, 0, 0, 0], ARRAY[0, 0, 0, 0, 0], ARRAY[0, 0, 0, 0, 0], ARRAY[0, 0, 0, 0, 0]]::integer[][]`),
 });
 
 export const iscrizioni = pgTable('iscrizioni', {

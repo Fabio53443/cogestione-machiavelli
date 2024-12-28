@@ -15,9 +15,9 @@ export const POST = async ({ locals, request }) => {
     }
     try {
         const formData = await request.json();
-        const { nome, descrizione, aula, numPosti, length, availability } = formData;
-
-        if (!nome || !descrizione || !aula || !numPosti || !availability || !length) {
+        const { nome, descrizione, aula, numPosti, length, availability, schedule  } = formData;
+        console.log(formData)
+        if (!nome || !descrizione || !aula || !numPosti || !availability || !length || !schedule) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
         
@@ -25,12 +25,13 @@ export const POST = async ({ locals, request }) => {
         await db.insert(corsi).values({
             nome,
             descrizione,
-            aula,
+            aula,   
             numPosti,
             docente: locals.user.id,
             length,
             postiDisponibili: numPosti, 
-            availability
+            availability, 
+            schedule
         });
 
         

@@ -44,6 +44,13 @@
                   <p class="text-gray-600">{corso.descrizione}</p>
                   <p class="text-gray-600">Aula: {corso.aula}</p>
                   <p class="text-gray-600">Posti disponibili: {corso.postiDisponibili}/{corso.numPosti}</p>
+                  <p class="text-gray-600">Posti disponibili: {corso.postiDisponibili}/{corso.numPosti}</p>
+                  <a
+                    href={`/docenti/courses/${corso.id}`}
+                    class="inline-block mt-2 bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"
+                  >
+                    Vedi Dettagli
+                  </a>
                 </div>
               </li>
             {/each}

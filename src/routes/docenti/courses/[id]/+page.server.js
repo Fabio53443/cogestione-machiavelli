@@ -29,6 +29,7 @@ export async function load({ params, locals }) {
       numPosti: course.numPosti, 
       schedule: course.schedule,
       availability: course.availability,
-    }
+    }, 
+    days: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì']
   };
 }

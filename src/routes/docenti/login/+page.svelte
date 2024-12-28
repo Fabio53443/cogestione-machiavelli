@@ -1,13 +1,14 @@
 <script>
     import Alert from "$lib/components/Alert.svelte";
-    import Cookies from 'js-cookie';
+    import Cookies from "js-cookie";
     let showAlert = false;
     let alertMessage = "";
     let alertType;
+    const suffix = "@spallanzanitivoli.edu.it";
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const username = event.target.elements.username.value;
+        const username = event.target.elements.username.value + suffix;
         const password = event.target.elements.password.value;
         try {
             const response = await fetch("/api/docenti/login", {
@@ -23,7 +24,11 @@
             if (result.success) {
                 alertType = "success";
                 alertMessage = "Login successful!";
-                Cookies.set('token', result.token, { expires: 7, secure: true, sameSite: 'Strict' });
+                Cookies.set("token", result.token, {
+                    expires: 7,
+                    secure: true,
+                    sameSite: "Strict",
+                });
                 window.location.href = "/docenti/dashboard";
             } else {
                 alertType = "error";
@@ -35,7 +40,6 @@
         } finally {
             showAlert = true;
         }
-        
     };
 </script>
 
@@ -57,14 +61,21 @@
                 >
                     Email
                 </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="email"
-                    required
-                />
+                <div class="relative">
+                    <input
+                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="email"
+                        required
+                    />
+                    <span
+                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
+                    >
+                        {suffix}
+                    </span>
+                </div>
             </div>
             <div class="mb-6">
                 <label

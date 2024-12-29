@@ -14,10 +14,8 @@
     <title>{pageName}</title>
 </svelte:head>
 
-<main
-    class="min-h-screen flex flex-col bg-[#1f1f21]"
->
-    <header class="bg-[#121214] shadow-lg">
+<main class="min-h-screen flex flex-col bg-gradient-to-br from-[#1e1e2e] to-[#181825]">
+    <header class="bg-gradient-to-r from-[#1e1e2e] via-[#181825] to-[#1e1e2e] shadow-lg shadow-[#11111b]/20">
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="flex items-center mb-4 sm:mb-0">
@@ -26,13 +24,13 @@
                     {:else}
                         <a
                             href="/"
-                            class="text-4xl text-gray-100 mr-4 hover:text-[#FB773C] transition-colors duration-200"
+                            class="text-4xl text-[#cdd6f4] mr-4 hover:text-[#f5c2e7] transition-colors duration-300"
                             aria-label="Home"
                         >
                             🏠
                         </a>
                     {/if}
-                    <h1 class="text-3xl font-bold text-[#FB773C]">
+                    <h1 class="text-3xl font-bold text-[#f5c2e7]">
                         {pageName}
                     </h1>
                 </div>
@@ -40,17 +38,17 @@
                 <nav class="flex space-x-4">
                     <a
                         href="/login"
-                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Accedi</a
                     >
                     <a
                         href="/register"
-                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Registrati</a
                     >
                     <a
                         href="/docenti"
-                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Portale Docenti</a
                     >
                 </nav>
@@ -58,12 +56,12 @@
                 <nav class="flex space-x-4">
                     <a
                         href="/docenti"
-                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Portale Docenti</a
                     >
                     <a
                         href="/logout"
-                        class="text-gray-100 hover:text-[#FB773C] transition-colors duration-200 text-lg"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Esci</a
                     >
                 </nav>
@@ -77,14 +75,14 @@
         <slot></slot>
     </div>
 
-    <footer class="bg-[#121214] text-gray-100 py-4 mt-auto">
+    <footer class="bg-gradient-to-r from-[#1e1e2e] via-[#181825] to-[#1e1e2e] text-[#cdd6f4] py-4 mt-auto">
         <div class="container mx-auto px-4 text-center text-sm">
             Copyright &copy; 2024
             <a
                 href="https://smartlinux.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#FB773C] hover:underline hover:text-[#FB773C] transition duration-200"
+                class="text-[#f5c2e7] hover:text-[#fab387] transition-all duration-300 hover:scale-105"
             >
                 Smartlinux.xyz
             </a>. All rights reserved.
@@ -97,7 +95,8 @@
 
     :global(body) {
         font-family: "Inter", sans-serif;
-        color: white;
+        color: #4764c2;
         margin: 0;
+        background: #1e1e2e;
     }
 </style>

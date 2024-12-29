@@ -10,7 +10,7 @@
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
   <div class="w-full max-w-4xl">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-[#FB773C]">Dashboard Corsi</h1>
+      <h1 class="text-3xl font-bold text-[#FB773C]">I tuoi corsi</h1>
       <button 
         on:click={navigateToRegistration}
         class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">

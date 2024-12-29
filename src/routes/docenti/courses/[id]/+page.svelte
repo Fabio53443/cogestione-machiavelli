@@ -36,12 +36,12 @@
     {error}
   </div>
 {:else if corso}
-  <h1 class="text-3xl font-bold text-[#FB773C] mb-4">Dettagli Corso: {corso.nome}</h1>
+  <h1 class="text-3xl font-bold text-[#FB773C] mb-4">"{corso.nome}"</h1>
   <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-4 mb-4 flex justify-between items-center">       
 
     <div>
-          <p class="text-gray-600 mb-2"><strong>Descrizione:</strong> {corso.descrizione}</p>
-    <p class="text-gray-600 mb-2"><strong>Aula:</strong> {corso.aula}</p>
+          <p class="text-gray-600 mb-2 text-xl"><strong>Descrizione:</strong> {corso.descrizione}</p>
+    <p class="text-gray-600 mb-2 text-xl"><strong>Aula:</strong> {corso.aula}</p>
     </div>
     <div>
       <button class="bg-[#FB773C] text-white px-3 py-1 rounded hover:bg-yellow-600 mb-4" on:click={() => goto(`/docenti/courses/${corso.id}/edit`)}>

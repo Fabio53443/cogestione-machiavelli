@@ -19,7 +19,7 @@ export async function load({ params, locals }) {
   }
 
   return {
-    pageName: 'Dettagli', 
+    pageName: 'Dettagli del corso', 
     corso: {
       id: course.id,
       nome: course.nome,

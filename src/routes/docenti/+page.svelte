@@ -11,7 +11,7 @@
 <div
     class="container mx-auto flex flex-col items-center justify-center p-4"
 >
-    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-4">
+    <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-4">
         Portale Docenti
     </h1>
     <p class="text-center mt-2 mb-4">

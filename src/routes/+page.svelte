@@ -8,7 +8,7 @@
 </script>
 
 <div class="max-w-2xl mx-auto text-center">
-    <h1 class="text-4xl font-bold mb-6 text-[#EB3678]">
+    <h1 class="text-4xl font-bold mb-6 text-[#FB773C]">
         Benvenuti alla Cogestione del Liceo Spallanzani di Tivoli
     </h1>
     <p class="text-xl mb-8 text-gray-300">
@@ -34,8 +34,8 @@
     </form>
 
     <div class="space-x-4">
-        <a href="/login" class="text-[#FB773C] hover:text-[#EB3678] transition duration-200 font-semibold">Accedi</a>
+        <a href="/login" class="text-[#FB773C] hover:text-[#FB773C] transition duration-200 font-semibold">Accedi</a>
         <span class="text-gray-400">|</span>
-        <a href="/register" class="text-[#FB773C] hover:text-[#EB3678] transition duration-200 font-semibold">Registrati</a>
+        <a href="/register" class="text-[#FB773C] hover:text-[#FB773C] transition duration-200 font-semibold">Registrati</a>
     </div>
 </div>

@@ -49,3 +49,21 @@ export const POST = async ({ locals, request }) => {
         return json({ success: false, message: 'Shit failed' }, { status: 500 });
     }
 };
+
+export const PUT = async ({ locals, request }) => {
+    if (!locals.user || locals.user.role !== 'docente') {
+        return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
+    }
+    try {
+        const { id, nome, descrizione, aula, numPosti, length, availability } = await request.json();
+        if (!id || !nome || !descrizione || !aula || !numPosti || !length || !availability) {
+            return json({ success: false, message: 'All fields are required.' }, { status: 400 });
+        }
+        await db.update(corsi)
+            .set({ nome, descrizione, aula, numPosti, postiDisponibili: numPosti, length, availability })
+            .where(eq(corsi.id, id));
+        return json({ success: true });
+    } catch (error) {
+        return json({ success: false, message: 'Error updating course.' }, { status: 500 });
+    }
+};

@@ -1,5 +1,6 @@
 <script>
   import AttendanceModal from '$lib/components/AttendanceModal.svelte';
+  import { goto } from '$app/navigation';
   export let data;
   const { corso, error } = data;
   let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
@@ -35,30 +36,41 @@
     {error}
   </div>
 {:else if corso}
-  <h1 class="text-3xl font-bold text-[#EB3678] mb-4">Dettagli Corso: {corso.nome}</h1>
-  <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-    <p class="text-gray-600 mb-2"><strong>Descrizione:</strong> {corso.descrizione}</p>
+  <h1 class="text-3xl font-bold text-[#FB773C] mb-4">Dettagli Corso: {corso.nome}</h1>
+  <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-4 mb-4 flex justify-between items-center">       
+
+    <div>
+          <p class="text-gray-600 mb-2"><strong>Descrizione:</strong> {corso.descrizione}</p>
     <p class="text-gray-600 mb-2"><strong>Aula:</strong> {corso.aula}</p>
-    <p class="text-gray-600 mb-2"><strong>Posti disponibili:</strong> {corso.postiDisponibili}/{corso.numPosti}</p>
+    </div>
+    <div>
+      <button class="bg-[#FB773C] text-white px-3 py-1 rounded hover:bg-yellow-600 mb-4" on:click={() => goto(`/docenti/courses/${corso.id}/edit`)}>
+        Modifica Corso
+      </button>
+    </div>
   </div>
+
   
   {#if corso.schedule && corso.availability}
 
     {#each days as day, dayIndex}
       {#if corso.availability.includes(dayIndex)}
-        <section class="mt-6 p-4 rounded shadow">
-          <h2 class="text-xl font-semibold mb-4">{day}</h2>
-          <table class="w-full text-base">
+      <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-4 mb-4">
+        <h2 class="text-xl text-black font-semibold mb-2">{day}</h2>
+        <p class="text-gray-600 mb-2"><strong>Numero di studenti iscritti:</strong> 
+          {corso.schedule[dayIndex].reduce((sum, hourSeats) => sum + (corso.numPosti - (hourSeats ?? 0)), 0)}
+        </p>
+      <table class="w-full text-base">
             <thead>
               <tr>
-                <th class="py-3 w-24 text-left pl-4">Ora</th>
-                <th class="py-3 text-left">Posti</th>
-                <th class="py-3 w-24 text-right pr-4">Azioni</th>
+                <th class="py-3 w-24 text-left pl-4 text-black">Ora</th>
+                <th class="py-3 text-left text-black">Posti</th>
+                <th class="py-3 w-24 text-center pr-4 text-black">Azioni</th>
               </tr>
             </thead>
             <tbody>
               {#each corso.schedule[dayIndex] as hourSeats, timeIndex}
-                <tr class="hover:bg-gray-100 hover:bg-opacity-20 transition-colors">
+                <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
                   <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
                   <td class="py-3">
                     <div class="flex items-center gap-4">
@@ -73,7 +85,7 @@
                       </div>
                     </div>
                   </td>
-                  <td class="py-3 text-right pr-4">
+                  <td class="py-3 text-right pr-7 pl-7">
                     <button
                       class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                       on:click={() => openAttendanceModal(dayIndex, timeIndex)}
@@ -85,8 +97,8 @@
               {/each}
             </tbody>
           </table>
-        </section>
-      {/if}
+        </div>
+        {/if}
     {/each}
   {/if}
 

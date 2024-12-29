@@ -10,7 +10,7 @@
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
   <div class="w-full max-w-4xl">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-[#EB3678]">Dashboard Corsi</h1>
+      <h1 class="text-3xl font-bold text-[#FB773C]">Dashboard Corsi</h1>
       <button 
         on:click={navigateToRegistration}
         class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">
@@ -40,7 +40,7 @@
         <ul class="space-y-4">
           {#each corsi as corso (corso.id)}
             <li class="border rounded-lg p-4 hover:shadow-md transition duration-200">
-              <h4 class="text-lg font-semibold text-[#EB3678] mb-2">{corso.nome}</h4>
+              <h4 class="text-lg font-semibold text-[#FB773C] mb-2">{corso.nome}</h4>
               <p class="text-gray-600 mb-3">{corso.descrizione}</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                 <p><span class="font-semibold">Aula:</span> {corso.aula}</p>

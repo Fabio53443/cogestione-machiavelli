@@ -15,7 +15,7 @@
   
   <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
     <div class="w-full max-w-4xl">
-      <h1 class="text-3xl font-bold text-[#EB3678] mb-8">Corsi Disponibili</h1>
+      <h1 class="text-3xl font-bold text-[#FB773C] mb-8">Corsi Disponibili</h1>
   
       <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
         {#if error}
@@ -32,7 +32,7 @@
               <div class="border rounded-lg p-6 hover:shadow-md transition duration-200">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h3 class="text-xl font-semibold text-[#EB3678]">{corso.nome}</h3>
+                    <h3 class="text-xl font-semibold text-[#FB773C]">{corso.nome}</h3>
                     <p class="text-gray-600 mt-1">{corso.descrizione}</p>
                   </div>
                   <div class="text-right">

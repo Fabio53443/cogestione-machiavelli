@@ -72,7 +72,7 @@
 <Alert type={alertType} message={alertMessage} show={showAlert} />
 
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
-    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-8">Crea Nuovo Corso</h1>
+    <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-8">Crea Nuovo Corso</h1>
     <div class="w-full max-w-md">
         <form 
             on:submit={handleSubmit}
@@ -178,7 +178,7 @@
                                 type="checkbox"
                                 checked={formData.availability.includes(giorno.id)}
                                 on:change={() => handleGiornoToggle(giorno.id)}
-                                class="form-checkbox h-5 w-5 text-[#EB3678] rounded border-gray-300 focus:ring-[#EB3678]"
+                                class="form-checkbox h-5 w-5 text-[#FB773C] rounded border-gray-300 focus:ring-[#EB3678]"
                             />
                             <span class="ml-2 text-gray-700">{giorno.name}</span>
                         </label>

@@ -64,7 +64,7 @@
 <div
     class="container mx-auto flex flex-col items-center justify-start pt-16 px-4"
 >
-    <h1 class="text-3xl font-bold text-center text-[#EB3678] mb-8">
+    <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-8">
         Registrati
     </h1>
     <div class="w-full max-w-md">

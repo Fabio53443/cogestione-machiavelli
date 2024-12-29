@@ -20,7 +20,7 @@
         <div
             class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col"
         >
-            <h1 class="text-3xl font-bold mb-4 text-center text-[#EB3678]">
+            <h1 class="text-3xl font-bold mb-4 text-center text-[#FB773C]">
                 Logout
             </h1>
             <p class="text-center text-gray-500">Sei sicuro di voler uscire?</p>

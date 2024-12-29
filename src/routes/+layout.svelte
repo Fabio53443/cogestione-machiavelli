@@ -15,9 +15,9 @@
 </svelte:head>
 
 <main
-    class="min-h-screen flex flex-col bg-gradient-to-b from-[#180161] to-[#4F1787]"
+    class="min-h-screen flex flex-col bg-[#1f1f21]"
 >
-    <header class="bg-[#4F1787] shadow-lg">
+    <header class="bg-[#121214] shadow-lg">
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="flex items-center mb-4 sm:mb-0">
@@ -32,7 +32,7 @@
                             🏠
                         </a>
                     {/if}
-                    <h1 class="text-3xl font-bold text-[#EB3678]">
+                    <h1 class="text-3xl font-bold text-[#FB773C]">
                         {pageName}
                     </h1>
                 </div>
@@ -77,14 +77,14 @@
         <slot></slot>
     </div>
 
-    <footer class="bg-[#4F1787] text-gray-100 py-4 mt-auto">
+    <footer class="bg-[#121214] text-gray-100 py-4 mt-auto">
         <div class="container mx-auto px-4 text-center text-sm">
             Copyright &copy; 2024
             <a
                 href="https://smartlinux.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#FB773C] hover:underline hover:text-[#EB3678] transition duration-200"
+                class="text-[#FB773C] hover:underline hover:text-[#FB773C] transition duration-200"
             >
                 Smartlinux.xyz
             </a>. All rights reserved.

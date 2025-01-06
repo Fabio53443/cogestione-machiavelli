@@ -11,7 +11,7 @@
         const username = event.target.elements.username.value + suffix;
         const password = event.target.elements.password.value;
         try {
-            const response = await fetch("/api/login", {
+            const response = await fetch("/api/studenti/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

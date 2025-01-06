@@ -44,8 +44,8 @@
               <p class="text-gray-600 mb-3">{corso.descrizione}</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
                 <p><span class="font-semibold">Aula:</span> {corso.aula}</p>
-                <p><span class="font-semibold">Orario:</span> {corso.giorno} alle {corso.ora}</p>
-                <p><span class="font-semibold">Docente:</span> {corso.docenteNome}</p>
+                <p><span class="font-semibold">Giorno:</span> {corso.giorno ?? 'N/D'}</p>
+                <p><span class="font-semibold">Ora:</span> {corso.ora ?? 'N/D'}</p>
               </div>
             </li>
           {/each}

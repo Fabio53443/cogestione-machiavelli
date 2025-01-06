@@ -11,12 +11,21 @@ export async function load({ locals }) {
   try {
     // Get student's current enrollments
     const currentEnrollments = await db
-      .select({ idCorso: iscrizioni.idCorso })
+      .select({
+        idCorso: iscrizioni.idCorso,
+        giorno: iscrizioni.giorno,
+        ora: iscrizioni.ora
+      })
       .from(iscrizioni)
       .where(eq(iscrizioni.idStudente, locals.user.id));
 
     const enrolledCourseIds = currentEnrollments.map(e => e.idCorso);
 
+    const enrollmentMap = new Map();
+    currentEnrollments.forEach(e => {
+      enrollmentMap.set(e.idCorso, { giorno: e.giorno, ora: e.ora });
+    });
+    
     // Get all available courses with professor info and enrollment count
     const availableCorsi = await db
       .select({
@@ -32,18 +41,22 @@ export async function load({ locals }) {
       .leftJoin(professori, eq(corsi.docente, professori.id));
 
     // Transform the data for the client
-    const corsiProcessed = availableCorsi.map(({ corso, docente, enrollmentCount }) => ({
-      id: corso.id,
-      nome: corso.nome,
-      descrizione: corso.descrizione,
-      aula: corso.aula,
-      numPosti: corso.numPosti,
-      postiDisponibili: corso.numPosti - enrollmentCount,
-      ora: corso.ora,
-      giorno: corso.giorno,
-      docenteNome: `${docente.nome} ${docente.cognome}`,
-      iscritto: enrolledCourseIds.includes(corso.id)
-    }));
+    const corsiProcessed = availableCorsi.map(({ corso, docente, enrollmentCount }) => {
+      const enrolledInfo = enrollmentMap.get(corso.id);
+      return {
+        id: corso.id,
+        nome: corso.nome,
+        descrizione: corso.descrizione,
+        aula: corso.aula,
+        numPosti: corso.numPosti,
+        postiDisponibili: corso.numPosti - enrollmentCount,
+        docenteNome: `${docente.nome} ${docente.cognome}`,
+        iscritto: enrolledCourseIds.includes(corso.id),
+        // Use enrollment giorno/ora only:
+        giorno: enrolledInfo?.giorno ?? null,
+        ora: enrolledInfo?.ora ?? null
+      };
+    });
 
     return {
       pageName: 'Corsi disponibili',

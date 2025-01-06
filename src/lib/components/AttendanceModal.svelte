@@ -28,7 +28,7 @@
 
   async function toggleAttendance(student) {
     try {
-      const res = await fetch(`/api/attendance/${student.id}`, {
+      const res = await fetch(`/api/studenti/attendance/${student.id}`, {
         method: 'PUT',
         body: JSON.stringify({ 
           studentId: student.id,
@@ -49,7 +49,7 @@
   async function massUpdateAttendance(present) {
     try {
       const promises = Array.from(selectedStudents).map(studentId => 
-        fetch(`/api/attendance/${studentId}`, {
+        fetch(`/api/studenti/attendance/${studentId}`, {
           method: 'PUT',
           body: JSON.stringify({ studentId, present }),
           headers: { 'Content-Type': 'application/json' }

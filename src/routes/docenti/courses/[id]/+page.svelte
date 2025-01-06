@@ -17,7 +17,7 @@
   async function openAttendanceModal(dayIndex, timeIndex) {
     currentHour = timeIndex;
     currentDay = dayIndex;
-    const response = await fetch(`/api/attendance/${corso.id}?hour=${currentHour}&day=${currentDay}`);
+    const response = await fetch(`/api/studenti/attendance/${corso.id}?hour=${currentHour}&day=${currentDay}`);
     if (response.ok) {
       selectedStudents = await response.json();
       showAttendanceModal = true;

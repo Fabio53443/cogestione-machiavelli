@@ -45,8 +45,6 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700 mb-4">
                   <p><span class="font-semibold">Aula:</span> {corso.aula}</p>
-                  <p><span class="font-semibold">Orario:</span> {corso.giorno} alle {corso.ora}</p>
-                  <p><span class="font-semibold">Docente:</span> {corso.docenteNome}</p>
                 </div>
   
                 {#if corso.iscritto}

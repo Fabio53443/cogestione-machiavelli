@@ -24,7 +24,7 @@
         const password = event.target.elements.password.value;
 
         try {
-            const response = await fetch("/api/register", {
+            const response = await fetch("/api/studenti/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

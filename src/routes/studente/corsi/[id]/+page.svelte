@@ -28,7 +28,9 @@
       alertType = 'success';
       alertMessage = 'Iscrizione avvenuta con successo';
       showAlert = true;
-      goto(`/studente/corsi/${corso.id}`);
+      //refresh the page
+      location.reload();
+
     } else {
       alertType = 'error';
       alertMessage = `Errore: ${result.message}`;
@@ -50,9 +52,17 @@
   }
 
   function isEnrolled(dayIndex, timeIndex) {
-    return iscrizioni.some(iscrizione => 
+    return iscrizioni?.some(iscrizione => 
       iscrizione.giorno === dayIndex && iscrizione.ora === timeIndex && iscrizione.idCorso === corso.id
     );
+  }
+
+  function computeFreeSeats(dayIndex, timeIndex) {
+    let usedSeats = 0;
+    for (let i = 0; i < corso.length; i++) {
+      usedSeats += corso.schedule[dayIndex][timeIndex + i] ?? 0;
+    }
+    return Math.max(corso.numPosti - usedSeats, 0);
   }
 </script>
 
@@ -86,15 +96,23 @@
             </tr>
           </thead>
           <tbody>
-            {#each Array(5 - corso.length + 1).fill(0).map((_, timeIndex) => timeIndex) as timeIndex}
+            {#each Array(5 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
               <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
-                <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
+                {#if corso.length > 1}
+                  <td class="py-3 text-center">
+                    {timeIndex + 1}° - {timeIndex + corso.length}°
+                  </td>
+                {:else}
+                  <td class="py-3 text-center">
+                    {timeIndex + 8}:00
+                  </td>
+                {/if}
                 {#each days as _, dayIndex}
                   <td class="py-3 text-center">
                     {#if corso.availability.includes(dayIndex) && canEnroll(dayIndex, timeIndex)}
                       <div class="flex flex-col items-center gap-2 justify-center">
                         <div class="text-base whitespace-nowrap">
-                          {(corso.numPosti - (corso.schedule[dayIndex][timeIndex] ?? 0))}/{corso.numPosti}
+                          {computeFreeSeats(dayIndex, timeIndex)}/{corso.numPosti}
                         </div>
                         <button
                           class={`px-3 py-1 rounded mt-2 ${isEnrolled(dayIndex, timeIndex) ? 'bg-red-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
@@ -105,8 +123,8 @@
                         </button>
                         <div class="relative w-full bg-gray-200 h-3 rounded mt-2">
                           <div
-                            class={`absolute top-0 left-0 h-3 rounded ${barColor((corso.schedule[dayIndex][timeIndex] ?? 0), corso.numPosti)}`}
-                            style="width: {(((corso.numPosti - (corso.schedule[dayIndex][timeIndex] ?? 0)) / corso.numPosti) * 100)}%;"
+                            class={`absolute top-0 left-0 h-3 rounded ${barColor(computeFreeSeats(dayIndex, timeIndex), corso.numPosti)}`}
+                            style="width: {((computeFreeSeats(dayIndex, timeIndex) / corso.numPosti) * 100)}%;"
                           />
                         </div>
                       </div>

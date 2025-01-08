@@ -19,12 +19,10 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="flex items-center mb-4 sm:mb-0">
-                    {#if pageName === "Cogestione"}
-                        <img src={favicon} alt="Logo" class="w-12 h-12 mr-4" />
-                    {:else}
+                    {#if pageName != "Cogestione"}
                         <a
                             href="/"
-                            class="text-4xl text-[#cdd6f4] mr-4 hover:text-[#f5c2e7] transition-colors duration-300"
+                            class="text-3xl text-[#cdd6f4] mr-4 hover:text-[#f5c2e7] transition-colors duration-300"
                             aria-label="Home"
                         >
                             🏠
@@ -41,31 +39,33 @@
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Accedi</a
                     >
-                    <a
-                        href="/register"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Registrati</a
-                    >
+
                     <a
                         href="/docenti"
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Portale Docenti</a
                     >
                 </nav>
-                {:else}
+                {:else if user.role === "studente"}
                 <nav class="flex space-x-4">
-                    <a
-                        href="/docenti"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Portale Docenti</a
-                    >
+
                     <a
                         href="/logout"
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Esci</a
                     >
                 </nav>
-                
+
+                {:else if user.role === "docente"}
+                <nav class="flex space-x-4">
+
+                    <a
+                        href="/logout"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Esci</a
+                    >
+                </nav>
+
                 {/if}
             </div>
         </div>
@@ -85,7 +85,16 @@
                 class="text-[#f5c2e7] hover:text-[#fab387] transition-all duration-300 hover:scale-105"
             >
                 Smartlinux.xyz
-            </a>. All rights reserved.
+            </a> +             <a
+                href="https://github.com/fabio53443"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#f5c2e7] hover:text-[#fab387] transition-all duration-300 hover:scale-105"
+            >
+                Fabio53443
+            </a>
+             
+            All rights reserved.
         </div>
     </footer>
 </main>

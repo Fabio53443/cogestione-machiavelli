@@ -36,46 +36,24 @@
                     <p class="text-gray-600 mt-1">{corso.descrizione}</p>
                   </div>
                   <div class="text-right">
-                    <p class="text-sm font-medium text-gray-500">Posti disponibili</p>
-                    <p class="text-lg font-bold {corso.postiDisponibili > 5 ? 'text-green-600' : 'text-orange-600'}">
-                      {corso.postiDisponibili}/{corso.numPosti}
-                    </p>
+                    {#if corsi.iscritto}
+                      <span class="text-green-500">Iscritto</span>
+                      
+                    {/if}
+
                   </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700 mb-4">
                   <p><span class="font-semibold">Aula:</span> {corso.aula}</p>
-                </div>
-  
-                {#if corso.iscritto}
-                  <button 
-                    class="w-full bg-green-100 text-green-700 font-semibold py-2 px-4 rounded-lg cursor-default"
-                    disabled
-                  >
-                    Già iscritto
-                  </button>
-                {:else if corso.postiDisponibili === 0}
-                  <button 
-                    class="w-full bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg cursor-default"
-                    disabled
-                  >
-                    Corso al completo
-                  </button>
-                {:else}
-                  <form 
-                    method="POST" 
-                    action="?/enroll" 
-                    use:enhance
-                  >
-                    <input type="hidden" name="courseId" value={corso.id}>
-                    <button 
-                      type="submit"
-                      class="w-full bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"
-                    >
-                      Iscriviti
-                    </button>
-                  </form>
-                {/if}
+                </div >
+                <div class="flex justify-end">
+                  <a href="/studente/corsi/{corso.id}" class="w-full bg-[#FB773C] hover:bg-[#EB3678] text-white text-center font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">
+                    
+                      Dettagli
+                </a>
+              </div>
+
               </div>
             {/each}
           </div>

@@ -20,7 +20,8 @@ export async function handle({ event, resolve }) {
             event.locals.user = {
                 username: payload.username,
                 id: payload.id,
-                role: payload.role
+                role: payload.role, 
+                nome_completo: payload.nome_completo
             };
         } catch (err) {
             event.locals.user = null;

@@ -24,6 +24,7 @@ export async function load({ params, locals }) {
       id: course.id,
       nome: course.nome,
       descrizione: course.descrizione,
+      length: course.length,
       aula: course.aula,
       postiDisponibili: course.postiDisponibili,
       numPosti: course.numPosti, 

@@ -101,6 +101,14 @@
                     Accedi
                 </button>
             </div>
+            <div class="flex items-center justify-between">
+                <p class="text-gray-600 text-sm mt-4 text-center"
+                    
+                >
+                    Non sei ancora registrato? Fallo qui: <a href="/register" class="text-[#FB773C] hover:text-[#FB773C] transition duration-200 font-semibold ">Registrati</a>
+            </p>
+            </div>
+            
         </form>
     </div>
 </div>

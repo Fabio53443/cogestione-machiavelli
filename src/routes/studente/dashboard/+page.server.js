@@ -14,21 +14,23 @@ export async function load({ locals }) {
     const userIscrizioni = await db
       .select({
         corso: corsi,
-        docente: professori
+        docente: professori, 
+        ora: iscrizioni.ora,
+        giorno: iscrizioni.giorno
       })
       .from(iscrizioni)
       .where(eq(iscrizioni.idStudente, locals.user.id))
       .leftJoin(corsi, eq(iscrizioni.idCorso, corsi.id))
       .leftJoin(professori, eq(corsi.docente, professori.id));
 
-    const corsiIscritto = userIscrizioni.map(({ corso, docente }) => ({
+    const corsiIscritto = userIscrizioni.map(({ corso, docente, ora, giorno }) => ({
       id: corso.id,
       nome: corso.nome,
       descrizione: corso.descrizione,
       aula: corso.aula,
       numPosti: corso.numPosti,
-      ora: corso.ora,
-      giorno: corso.giorno,
+      ora: ora,
+      giorno: giorno,
       docenteNome: `${docente.nome} ${docente.cognome}`
     }));
 

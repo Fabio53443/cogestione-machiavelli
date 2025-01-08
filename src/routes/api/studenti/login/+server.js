@@ -12,6 +12,7 @@ export const POST = async ({ request }) => {
     try {
         const formData = await request.json();
         const { username, password } = formData;
+        console.log(formData);
 
         if (!username || !password) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
@@ -19,10 +20,13 @@ export const POST = async ({ request }) => {
 
         const result = await db.select({
             id: studenti.id,
-            hashedPass: studenti.hashedPass
+            hashedPass: studenti.hashedPass, 
+            nome_completo: studenti.nomeCompleto
         })
         .from(studenti)
         .where(eq(studenti.email, username));
+        const nome_completo = result[0].nome_completo;
+        console.log("result: ", result);
 
         if (result.length === 0) {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });
@@ -32,7 +36,7 @@ export const POST = async ({ request }) => {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });
         }
         const id = result[0].id;
-        const token = await new SignJWT({ username, id , role: 'studente' })
+        const token = await new SignJWT({ username, id , role: 'studente', nome_completo })
             .setProtectedHeader({ alg: 'HS256' })
             .setIssuedAt()
             .setExpirationTime('1h')

@@ -1,6 +1,5 @@
 // src/hooks.server.js
 import { jwtVerify } from 'jose';
-import { rollupVersion } from 'vite';
 
 export async function handle({ event, resolve }) {
     let token = event.cookies.get('token');

@@ -101,6 +101,15 @@
                     Accedi
                 </button>
             </div>
+            <!-- Add a Google SSO button -->
+            <div class="flex items-center justify-between mt-4">
+                <a
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center"
+                    href="/api/studenti/google"
+                >
+                    Sign in with Google
+                </a>
+            </div>
             <div class="flex items-center justify-between">
                 <p class="text-gray-600 text-sm mt-4 text-center"
                     

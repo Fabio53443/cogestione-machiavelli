@@ -1,5 +1,11 @@
+import Cookies from 'js-cookie';
 export function load() {
-    return {
-      pageName: 'Logout', 
-    };
-  }
+  console.log('Logout');
+  
+  Cookies.remove("token");
+  return {
+    status: 302,
+    headers: {
+      location: "/login"
+    }
+  }}

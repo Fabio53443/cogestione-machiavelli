@@ -6,7 +6,7 @@ import { studenti } from '$lib/db/models';
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'http://localhost:5173/api/studenti/google/callback'
+  `${process.env.VITE_PUBLIC_API_URL}/api/studenti/google/callback`
 );
 
 export async function GET({ url, cookies }) {
@@ -48,7 +48,7 @@ export async function GET({ url, cookies }) {
     },
     body: JSON.stringify({
       username: email,
-      password: googleId, 
+      password: googleId,
     })
   });
   const data = await response.json();

@@ -92,10 +92,7 @@
 </div>
 
 <style>
-  input[type="checkbox"] {
-    cursor: pointer;
-  }
-  
+
   button:hover {
     cursor: pointer;
   }

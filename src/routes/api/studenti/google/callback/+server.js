@@ -6,7 +6,7 @@ import { studenti } from '$lib/db/models';
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'http://localhost:5173/api/studenti/google/callback'
+  `${process.env.VITE_PUBLIC_API_URL}/api/studenti/google/callback`
 );
 
 export async function GET({ url, cookies }) {
@@ -41,14 +41,14 @@ export async function GET({ url, cookies }) {
   });
 
   //call the login endpoint to get the token
-  const response = await fetch('http://localhost:5173/api/studenti/login', {
+  const response = await fetch(`${process.env.VITE_PUBLIC_API_URL}/api/studenti/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       username: email,
-      password: googleId, 
+      password: googleId,
     })
   });
   const data = await response.json();

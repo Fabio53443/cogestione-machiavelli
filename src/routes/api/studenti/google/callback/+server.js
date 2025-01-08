@@ -41,7 +41,7 @@ export async function GET({ url, cookies }) {
   });
 
   //call the login endpoint to get the token
-  const response = await fetch('http://localhost:5173/api/studenti/login', {
+  const response = await fetch(`${process.env.VITE_PUBLIC_API_URL}api/studenti/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

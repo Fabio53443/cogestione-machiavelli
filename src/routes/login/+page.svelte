@@ -54,60 +54,15 @@
             on:submit={handleLogin}
             class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
         >
-            <div class="mb-4">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="username"
-                >
-                    Email
-                </label>
-                <div class="relative">
-                    <input
-                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                        id="username"
-                        type="text"
-                        name="username"
-                        placeholder="Email"
-                        required
-                    />
-                    <span
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
-                    >
-                        {suffix}
-                    </span>
-                </div>
-            </div>
-            <div class="mb-6">
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="password"
-                >
-                    Password
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="******************"
-                    required
-                />
-            </div>
-            <div class="flex items-center justify-between">
-                <button
-                    class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full transition duration-200"
-                    type="submit"
-                >
-                    Accedi
-                </button>
-            </div>
+
+
             <!-- Add a Google SSO button -->
             <div class="flex items-center justify-between mt-4">
                 <a
                     class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center"
                     href="/api/studenti/google"
                 >
-                    Sign in with Google
+                    Accedi con Google (Istituzionale)
                 </a>
             </div>
             <div class="flex items-center justify-between">

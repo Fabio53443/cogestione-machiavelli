@@ -1,10 +1,17 @@
 <script>
   export let data;
   const { user, corsi, error } = data;
-
+  let giorni = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
   const navigateToRegistration = () => {
     window.location.href = '/studente/corsi';
   };
+
+  $: coursesPerDay = corsi.reduce((acc, corso) => {
+    const day = corso.giorno;
+    if (!acc[day]) acc[day] = [];
+    acc[day].push(corso);
+    return acc;
+  }, {});
 </script>
 
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
@@ -34,19 +41,25 @@
         </div>
       {:else}
         <h3 class="text-xl font-semibold text-gray-700 mb-4">I tuoi corsi</h3>
-        <ul class="space-y-4">
-          {#each corsi as corso (corso.id)}
-            <li class="border rounded-lg p-4 hover:shadow-md transition duration-200">
-              <h4 class="text-lg font-semibold text-[#FB773C] mb-2">{corso.nome}</h4>
-              <p class="text-gray-600 mb-3">{corso.descrizione}</p>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
-                <p><span class="font-semibold">Aula:</span> {corso.aula} </p>
-                <p><span class="font-semibold">Giorno:</span> {corso.giorno+1 ?? 'N/D'} 
-                <span class="font-semibold">Ora:</span> {corso.ora+1 ?? 'N/D'}</p>
-              </div>
-            </li>
-          {/each}
-        </ul>
+        {#each Object.entries(coursesPerDay) as [day, dayCourses] (day)}
+          <div class="mb-6">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">{giorni[parseInt(day)]}</h4>
+            <ul class="space-y-4">
+              {#each dayCourses.sort((a, b) => a.ora - b.ora) as corso (corso.uniqueKey)}
+                <li class="border rounded-lg p-4 hover:shadow-md transition duration-200 relative">
+                  <div class="absolute top-2 right-3">
+                    <span class="text-2xl font-bold text-green-500">{corso.ora + 1}°</span>
+                  </div>
+                  <div class="pr-16"> <!-- Add padding-right to prevent text overlap with hour -->
+                    <h5 class="text-lg font-semibold text-[#FB773C] mb-2">{corso.nome}</h5>
+                    <p class="text-gray-600 mb-3">{corso.descrizione}</p>
+                    <p class="text-gray-700"><span class="font-semibold">Aula:</span> {corso.aula}</p>
+                  </div>
+                </li>
+              {/each}
+            </ul>
+          </div>
+        {/each}
       {/if}
     </div>
   </div>

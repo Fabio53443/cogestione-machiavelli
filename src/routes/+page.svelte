@@ -1,11 +1,4 @@
-<script>
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const name = event.target.elements.name.value;
-        // You can handle the search logic here (e.g., redirect, filter, etc.)
-        console.log("Searching for:", name);
-    };
-</script>
+
 
 <div class="max-w-2xl mx-auto text-center">
     <h1 class="text-4xl font-bold mb-6 text-[#FB773C]">

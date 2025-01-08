@@ -9,7 +9,6 @@ export async function load({ locals }) {
   }
 
   try {
-    console.log(locals.user)
     // Get all courses the student is enrolled in
     const userIscrizioni = await db
       .select({
@@ -25,15 +24,14 @@ export async function load({ locals }) {
 
     const corsiIscritto = userIscrizioni.map(({ corso, docente, ora, giorno }) => ({
       id: corso.id,
+      uniqueKey: `${corso.id}-${giorno}-${ora}`, // Add this field for unique keying
       nome: corso.nome,
       descrizione: corso.descrizione,
       aula: corso.aula,
-      numPosti: corso.numPosti,
       ora: ora,
       giorno: giorno,
-      docenteNome: `${docente.nome} ${docente.cognome}`
     }));
-
+    console.log('corsiIscritto:', corsiIscritto);
     return {
       pageName: 'Dashboard studente',
       user: locals.user,

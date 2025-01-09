@@ -77,7 +77,7 @@
 
     <footer class="bg-gradient-to-r from-[#1e1e2e] via-[#181825] to-[#1e1e2e] text-[#cdd6f4] py-4 mt-auto">
         <div class="container mx-auto px-4 text-center text-sm">
-            Copyright &copy; 2024
+            Copyright &copy; 2025
             <a
                 href="https://smartlinux.xyz"
                 target="_blank"

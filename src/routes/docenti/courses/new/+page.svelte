@@ -1,6 +1,6 @@
 <script>
   import Alert from "$lib/components/Alert.svelte";
-
+  import { goto } from "$app/navigation";
   let showAlert = false;
   let alertMessage = "";
   let alertType;
@@ -47,6 +47,9 @@
           length: "",
           availability: [],
         };
+        setTimeout(() => {
+          goto("/docenti/courses");
+        }, 10);
       } else {
         alertType = "error";
         alertMessage = result.message || "Creazione corso fallita.";
@@ -151,20 +154,20 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="length">
           Durata (ore ogni giorno)
         </label>
-        <input
-          class="form-range shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-          id="length"
-          type="range"
-          min="1"
-          max="3"
-          bind:value={formData.length}
-          placeholder="La durata in ore di ogni lezione"
-          required
-        />
-        <span class="text-gray-700 text-sm"
-          >{formData.length} ore al giorno</span
-        >
+        <div class="flex items-center gap-4">
+          <input
+        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FB773C]"
+        id="length"
+        type="range"
+        min="1"
+        max="3"
+        bind:value={formData.length}
+        required
+          />
+          <span class="text-gray-700 font-medium min-w-[80px] text-center bg-gray-100 rounded-lg px-3 py-1">
+        {formData.length} {formData.length === 1 ? 'ora' : 'ore'}
+          </span>
+        </div>
       </div>
 
       <div class="mb-6">

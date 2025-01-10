@@ -34,7 +34,7 @@ export const POST = async ({ locals, request }) => {
       ).limit(1);
 
       if (conflictingEnrollment.length > 0) {
-        return json({ success: false, message: 'Already enrolled in another course at the specified time.' }, { status: 400 });
+        return json({ success: false, message: 'Sei già iscritto ad un corso in questa ora/giorno' }, { status: 400 });
       }
 
       // Check availability in the course schedule

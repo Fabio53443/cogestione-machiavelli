@@ -38,13 +38,41 @@
     }
   }
 
+  async function unenroll(dayIndex, timeIndex) {
+    const response = await fetch('/api/studenti/enroll', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        idCorso: corso.id,
+        giorno: dayIndex,
+        ora: timeIndex
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alertType = 'success';
+      alertMessage = 'Disiscrizione avvenuta con successo';
+      showAlert = true;
+      location.reload();
+    } else {
+      alertType = 'error';
+      alertMessage = `Errore: ${result.message}`;
+      showAlert = true;
+    }
+  }
+
   function barColor(free, total) {
     return free === 0 ? 'bg-red-500' : 'bg-green-500';
   }
 
   function canEnroll(dayIndex, timeIndex) {
     const courseLength = corso.length;
-    if (timeIndex + courseLength > 5) return false; // Ensure the course can fit in the day's schedule
+    if (timeIndex + courseLength > 4) return false; // Ensure the course can fit in the day's schedule
+    if (!corso.schedule || !corso.schedule[dayIndex]) return false;
     for (let i = 0; i < courseLength; i++) {
       if (corso.schedule[dayIndex][timeIndex + i] === undefined) return false;
     }
@@ -117,7 +145,7 @@
               </tr>
             </thead>
             <tbody>
-              {#each Array(5 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
+              {#each Array(4 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="p-4 border-b border-gray-200 font-medium">
                     {#if corso.length > 1}
@@ -140,16 +168,19 @@
                             <button
                               class={`px-2 sm:px-4 py-1 sm:py-2 text-sm rounded-lg font-medium transition-colors w-full sm:w-auto
                                 ${isEnrolled(dayIndex, timeIndex) 
-                                  ? 'bg-green-500 text-white' 
+                                  ? 'bg-green-500 hover:bg-red-500 text-white group' 
                                   : computeFreeSeats(dayIndex, timeIndex) === 0
                                     ? 'bg-gray-300 cursor-not-allowed'
                                     : 'bg-blue-500 hover:bg-blue-600 text-white'
                                 }`}
-                              on:click={() => !isEnrolled(dayIndex, timeIndex) && enroll(dayIndex, timeIndex)}
-                              disabled={isEnrolled(dayIndex, timeIndex) || computeFreeSeats(dayIndex, timeIndex) === 0}
+                              on:click={() => isEnrolled(dayIndex, timeIndex) 
+                                ? unenroll(dayIndex, timeIndex) 
+                                : enroll(dayIndex, timeIndex)}
+                              disabled={computeFreeSeats(dayIndex, timeIndex) === 0}
                             >
                               {#if isEnrolled(dayIndex, timeIndex)}
-                                ✓
+                                <span class="group-hover:hidden">✓</span>
+                                <span class="hidden group-hover:inline">Disiscriviti</span>
                               {:else if computeFreeSeats(dayIndex, timeIndex) === 0}
                                 Pieno
                               {:else}

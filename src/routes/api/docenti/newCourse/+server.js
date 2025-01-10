@@ -23,11 +23,11 @@ export const POST = async ({ locals, request }) => {
         
         let schedule = [];
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 4; i++) {
             if (availability.includes(i)) { 
-            schedule.push(Array(5).fill(numPosti));
+            schedule.push(Array(4).fill(numPosti));
             } else {
-            schedule.push(Array(5).fill(0));
+            schedule.push(Array(4).fill(0));
             }
         }
         await db.insert(corsi).values({
@@ -46,7 +46,7 @@ export const POST = async ({ locals, request }) => {
         return json({ success: true, message: 'Course registered successfully!' });
     } catch (error) {
         console.error('Error:', error);
-        return json({ success: false, message: 'Shit failed' }, { status: 500 });
+        return json({ success: false, message: 'Something went wrong ' }, { status: 500 });
     }
 };
 
@@ -64,6 +64,6 @@ export const PUT = async ({ locals, request }) => {
             .where(eq(corsi.id, id));
         return json({ success: true });
     } catch (error) {
-        return json({ success: false, message: 'Error updating course.' }, { status: 500 });
+        return json({ success: false, message: 'Something went wrong' }, { status: 500 });
     }
 };

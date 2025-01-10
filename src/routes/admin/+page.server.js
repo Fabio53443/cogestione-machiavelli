@@ -13,7 +13,6 @@ export const load = async ({ locals }) => {
     }).from(studenti).where(eq(studenti.id, locals.user.id));
 
     if (!user[0].admin ) {
-        console.log('Not an admin');
         throw redirect(302, '/studente/dashboard');
     }
 

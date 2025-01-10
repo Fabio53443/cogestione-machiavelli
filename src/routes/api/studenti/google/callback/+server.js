@@ -25,10 +25,6 @@ export async function GET({ url, cookies }) {
   const email = payload.email;
   const name = payload.name;
   const googleId = payload.sub;
-  console.log('email', email);
-  console.log('name', name);
-  console.log('googleId', googleId);
-
   // Insert or update user
   await db.insert(studenti).values({
     nomeCompleto: name,
@@ -52,7 +48,6 @@ export async function GET({ url, cookies }) {
     })
   });
   const data = await response.json();
-  console.log('data', data);
   cookies.set('token', data.token, { path: '/', httpOnly: true });
   throw redirect(302, '/studente/dashboard');
 }

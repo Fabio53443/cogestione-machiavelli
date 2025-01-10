@@ -18,10 +18,8 @@ export async function load({ params, locals }) {
     .where(eq(studenti.id, locals.user.id));
 
   if (!user[0].admin) {
-    console.log("Not an admin");
     throw redirect(302, "/studente/dashboard");
   }
-  console.log(id)
   const info_docente = await db
     .select({
       nome: professori.nomeCompleto,
@@ -29,11 +27,9 @@ export async function load({ params, locals }) {
     .from(professori)
     .where(eq(professori.id, id));
     const nome_docente = info_docente[0].nome;
-    console.log(nome_docente)
 
 
   try {
-    console.log(id)
     // Get all courses the teacher is teaching
     const teacherCorsi = await db
       .select()

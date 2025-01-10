@@ -12,7 +12,6 @@ export const POST = async ({ request }) => {
     try {
         const formData = await request.json();
         const { username, password } = formData;
-        console.log(formData);
 
         if (!username || !password) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
@@ -30,7 +29,6 @@ export const POST = async ({ request }) => {
         if (result.length === 0) {
             return json({ success: false, message: 'Invalid username or password.' }, { status: 401 });
         }
-        console.log(result[0].google_id, password);
         if (result[0].google_id === password) {
             const id = result[0].id;
             const token = await new SignJWT({ username, id , role: 'studente', nome_completo })
@@ -38,7 +36,6 @@ export const POST = async ({ request }) => {
                 .setIssuedAt()
                 .setExpirationTime('1h')
                 .sign(secret);
-            console.log('Token:', token);
             return json({ success: true, token });
 
                 }

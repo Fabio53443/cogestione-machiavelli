@@ -10,7 +10,6 @@ export async function load({ locals }) {
   }
 
   try {
-    console.log(locals.user)
     // Get all courses the teacher is teaching
     const teacherCorsi = await db
       .select()

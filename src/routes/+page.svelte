@@ -1,6 +1,7 @@
 
 
 <div class="max-w-2xl mx-auto text-center">
+    <img src="/favicon.png" alt="Logo" class="w-60 mx-auto mb-4" />
     <h1 class="text-4xl font-bold mb-6 text-[#FB773C]">
         Benvenuti alla Cogestione del Liceo Spallanzani di Tivoli
     </h1>

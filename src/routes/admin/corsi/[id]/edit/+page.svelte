@@ -22,7 +22,6 @@
   let alertType;
 
   async function handleSubmit(event) {
-    console.log("submit pressed");
     event.preventDefault();
     const requestData = {
       id: courseData.id,

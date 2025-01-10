@@ -12,10 +12,10 @@
     class="container mx-auto flex flex-col items-center justify-center p-4"
 >
     <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-4">
-        Portale Docenti
+        Portale Organizzatori
     </h1>
     <p class="text-center mt-2 mb-4">
-        Sei un docente? Accedi o registrati qui.
+        Sei un organizzatore? Accedi o registrati qui.
     </p>
     <div
         class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-4"

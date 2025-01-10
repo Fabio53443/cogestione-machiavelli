@@ -5,9 +5,7 @@
     import { onMount } from "svelte";
     $: pageName = $page.data.pageName;
     $: user = $page.data.user;
-    onMount(() => {
-        console.log(user);
-    });
+
 </script>
 
 <svelte:head>
@@ -28,6 +26,7 @@
                             🏠
                         </a>
                     {/if}
+                    
                     <h1 class="text-3xl font-bold text-[#f5c2e7]">
                         {pageName}
                     </h1>
@@ -43,7 +42,7 @@
                     <a
                         href="/docenti"
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Portale Docenti</a
+                        >Portale Organizzatori</a
                     >
                 </nav>
                 {:else if user.role === "studente"}

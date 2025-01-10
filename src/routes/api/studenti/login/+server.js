@@ -21,7 +21,7 @@ export const POST = async ({ request }) => {
         const result = await db.select({
             id: studenti.id,
             google_id: studenti.googleId, 
-            nome_completo: studenti.nomeCompleto
+            nome_completo: studenti.nomeCompleto, 
         })
         .from(studenti)
         .where(eq(studenti.email, username));

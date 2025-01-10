@@ -49,12 +49,8 @@
     class="container mx-auto flex flex-col items-center justify-start pt-16 px-4"
 >
     <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-8">Accedi</h1>
-    <div class="w-full max-w-md">
-        <form
-            on:submit={handleLogin}
-            class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
-        >
-
+    <div class="w-full max-w-md bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+    <p class="text-xl text-center text-gray-600 mb-4"> Accedi con il tuo Account Google <b>Istituzionale</b></p>
 
             <!-- Add a Google SSO button -->
             <div class="flex items-center justify-between mt-4">
@@ -62,17 +58,9 @@
                     class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center"
                     href="/api/studenti/google"
                 >
-                    Accedi con Google (Istituzionale)
+                    Accedi con Google
                 </a>
             </div>
-            <div class="flex items-center justify-between">
-                <p class="text-gray-600 text-sm mt-4 text-center"
-                    
-                >
-                    Non sei ancora registrato? Fallo qui: <a href="/register" class="text-[#FB773C] hover:text-[#FB773C] transition duration-200 font-semibold ">Registrati</a>
-            </p>
-            </div>
             
-        </form>
     </div>
 </div>

@@ -63,3 +63,61 @@ export const POST = async ({ locals, request }) => {
     return json({ success: false, message: 'Enrollment failed.' }, { status: 500 });
   }
 };
+
+export const DELETE = async ({ locals, request }) => {
+  try {
+    if (!locals.user || locals.user.role !== 'studente') {
+      return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
+    }
+    const { idCorso, giorno, ora } = await request.json();
+
+    if (!idCorso || giorno === undefined || ora === undefined) {
+      return json({ success: false, message: 'Missing unenrollment data.' }, { status: 400 });
+    }
+
+    // Fetch course details
+    const course = await db.select().from(corsi).where(eq(corsi.id, idCorso)).limit(1);
+
+    if (course.length === 0) {
+      return json({ success: false, message: 'Course not found.' }, { status: 404 });
+    }
+
+    const courseLength = course[0].length;
+
+    // Check if the student is enrolled in the course
+    for (let i = 0; i < courseLength; i++) {
+      const enrollment = await db.select().from(iscrizioni).where(
+        and(
+          eq(iscrizioni.idStudente, locals.user.id),
+          eq(iscrizioni.idCorso, idCorso),
+          eq(iscrizioni.giorno, giorno),
+          eq(iscrizioni.ora, ora + i)
+        )
+      ).limit(1);
+
+      if (enrollment.length === 0) {
+        return json({ success: false, message: 'Not enrolled in the specified course at the specified time.' }, { status: 400 });
+      }
+
+      // Proceed with unenrollment
+      await db.delete(iscrizioni).where(
+        and(
+          eq(iscrizioni.idStudente, locals.user.id),
+          eq(iscrizioni.idCorso, idCorso),
+          eq(iscrizioni.giorno, giorno),
+          eq(iscrizioni.ora, ora + i)
+        )
+      );
+
+      // Update the course schedule to increment the available slots
+      course[0].schedule[giorno][ora + i] += 1;
+    }
+    await db.update(corsi).set({ schedule: course[0].schedule }).where(eq(corsi.id, idCorso));
+
+    return json({ success: true, message: 'Unenrollment successful.' });
+  } catch (error) {
+    console.error('Unenrollment Error:', error);
+    return json({ success: false, message: 'Unenrollment failed.' }, { status: 500 });
+  }
+};
+

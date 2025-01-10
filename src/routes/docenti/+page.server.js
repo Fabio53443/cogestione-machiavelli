@@ -5,6 +5,6 @@ export function load( { locals }) {
     return redirect(302, '/docenti/dashboard');
       }
     return {
-      pageName: 'Portale Docenti', 
+      pageName: 'Portale Organizzatori', 
     };
   }

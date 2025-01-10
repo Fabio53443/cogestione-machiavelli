@@ -14,7 +14,8 @@ export const studenti = pgTable('studenti', {
   nomeCompleto: varchar('nome_completo', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
   hashedPass: text('hashed_pass').notNull(),
-  googleId: text('google_id').notNull().unique()
+  googleId: text('google_id').notNull().unique(), 
+  admin: boolean('admin').notNull().default(false),
 });
 
 export const corsi = pgTable('corsi', {

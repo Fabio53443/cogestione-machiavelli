@@ -31,7 +31,6 @@ export async function load({ locals }) {
       ora: ora,
       giorno: giorno,
     }));
-    console.log('corsiIscritto:', corsiIscritto);
     return {
       pageName: 'Dashboard studente',
       user: locals.user,

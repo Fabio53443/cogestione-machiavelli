@@ -11,7 +11,6 @@ export const load = async ({ locals }) => {
     const user = await db.select({
         admin: studenti.admin
     }).from(studenti).where(eq(studenti.id, locals.user.id));
-    console.log(user);
 
     if (!user[0].admin ) {
         console.log('Not an admin');

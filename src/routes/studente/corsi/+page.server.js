@@ -49,10 +49,10 @@ export async function load({ locals }) {
         descrizione: corso.descrizione,
         aula: corso.aula,
         numPosti: corso.numPosti,
+        length: corso.length,
         postiDisponibili: corso.numPosti - enrollmentCount,
         docenteNome: `${docente.nome} ${docente.cognome}`,
         iscritto: enrolledCourseIds.includes(corso.id),
-        // Use enrollment giorno/ora only:
         giorno: enrolledInfo?.giorno ?? null,
         ora: enrolledInfo?.ora ?? null
       };

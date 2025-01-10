@@ -46,6 +46,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700 mb-4">
                   <p><span class="font-semibold">Aula:</span> {corso.aula}</p>
+                  <p><span class="font-semibold">Durata:</span> {corso.length}h</p>
                 </div >
                 <div class="flex justify-end">
                   <a href="/studente/corsi/{corso.id}" class="w-full bg-[#FB773C] hover:bg-[#EB3678] text-white text-center font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">

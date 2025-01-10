@@ -10,7 +10,6 @@ const client = new OAuth2Client(
 );
 
 export async function GET({ url }) {
-    console.log('url', url);
   const authorizeUrl = client.generateAuthUrl({
     access_type: 'offline',
     prompt: 'consent',

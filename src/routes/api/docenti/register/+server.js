@@ -14,13 +14,8 @@ export const POST = async ({ request }) => {
             return json({ success: false, message: 'Codice segreto mancante' }, { status: 403 });
         }
         // Log the form data for debugging
-        console.log('Form Data:', formData);
 
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Log before inserting into the database
-        console.log('Inserting into DB:', {  nome, email, hashedPassword });
-
         // Insert the new user into the database
         await db.insert(professori).values({
             nomeCompleto: nome,

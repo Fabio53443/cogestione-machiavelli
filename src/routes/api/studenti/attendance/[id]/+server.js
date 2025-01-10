@@ -29,7 +29,6 @@ export async function GET({ params, url }) {
         attendance[i].studentName = student[0].nomeCompleto;
         attendance[i].studentEmail = student[0].email;
     }
-    console.log(attendance);
   return json(attendance);
 }
 

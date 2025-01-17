@@ -21,15 +21,23 @@ export const POST = async ({ locals, request }) => {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
         
-        let schedule = [];
+        let schedule = [
+            Array(4).fill(0),
+            Array(6).fill(0),
+            Array(4).fill(0),
+            Array(4).fill(0),
+            Array(6).fill(0),
+            Array(4).fill(0)
+        ];
 
-        for (let i = 0; i < 4; i++) {
-            if (availability.includes(i)) { 
-            schedule.push(Array(4).fill(numPosti));
+        availability.forEach(day => {
+            if (day === 1 || day === 4) {
+                schedule[day] = Array(6).fill(numPosti);
             } else {
-            schedule.push(Array(4).fill(0));
+                schedule[day] = Array(4).fill(numPosti).concat(Array(2).fill(0));
             }
-        }
+        });
+
         await db.insert(corsi).values({
             nome,
             descrizione,

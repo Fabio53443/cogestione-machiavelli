@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   export let data;
   const { corso, error } = data;
-  let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+  let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
 
   let showAttendanceModal = false;
   let selectedStudents = [];

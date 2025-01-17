@@ -44,7 +44,14 @@ export const corsi = pgTable("corsi", {
     .notNull()
     .array()
     .default(
-      sql`ARRAY[ARRAY[0, 0, 0, 0], ARRAY[0, 0, 0, 0], ARRAY[0, 0, 0, 0], ARRAY[0, 0, 0, 0], ARRAY[0, 0, 0, 0]]::integer[][]`
+      sql`ARRAY[
+      ARRAY[0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0],
+            ARRAY[0, 0, 0, 0, 0, 0]
+]::integer[][]`
     ),
 });
 

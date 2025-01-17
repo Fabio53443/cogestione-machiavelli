@@ -20,6 +20,7 @@
     { id: 2, name: "Mercoledì" },
     { id: 3, name: "Giovedì" },
     { id: 4, name: "Venerdì" },
+    { id: 5, name: "Sabato" },
   ];
 
   async function handleSubmit(event) {

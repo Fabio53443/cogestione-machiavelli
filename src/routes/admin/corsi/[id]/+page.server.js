@@ -37,6 +37,6 @@ export async function load({ params, locals }) {
       schedule: course.schedule,
       availability: course.availability,
     },
-    days: ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"],
+    days: ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"],
   };
 }

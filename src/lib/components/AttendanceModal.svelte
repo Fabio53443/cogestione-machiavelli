@@ -84,7 +84,7 @@
   <div class="bg-white rounded-lg max-w-6xl w-full">
     <!-- Header Bar -->
     <div class="flex items-center justify-between px-6 py-3 border-b bg-gray-50">
-      <h2 class="text-xl font-bold text-gray-800">Student Attendance</h2>
+      <h2 class="text-xl font-bold text-gray-800">Appello</h2>
       <div class="flex items-center gap-3">
         <div class="flex gap-2">
           <button

@@ -71,7 +71,7 @@
 
   function canEnroll(dayIndex, timeIndex) {
     const courseLength = corso.length;
-    if (timeIndex + courseLength > 4) return false; // Ensure the course can fit in the day's schedule
+    if (timeIndex + courseLength > 6) return false; // Ensure the course can fit in the day's schedule
     if (!corso.schedule || !corso.schedule[dayIndex]) return false;
     for (let i = 0; i < courseLength; i++) {
       if (corso.schedule[dayIndex][timeIndex + i] === undefined) return false;
@@ -145,7 +145,7 @@
               </tr>
             </thead>
             <tbody>
-              {#each Array(4 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
+              {#each Array(6 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="p-4 border-b border-gray-200 font-medium">
                     {#if corso.length > 1}

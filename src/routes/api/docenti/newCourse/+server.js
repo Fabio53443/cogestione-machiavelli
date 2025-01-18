@@ -42,7 +42,7 @@ export const POST = async ({ locals, request }) => {
             Array(6).fill(0),
             Array(6).fill(0)
         ];
-
+        
         availability.forEach(day => {
             if (day === 1 || day === 4) {
                 schedule[day] = Array(6).fill(numPosti);
@@ -50,7 +50,7 @@ export const POST = async ({ locals, request }) => {
                 schedule[day] = Array(4).fill(numPosti).concat(Array(2).fill(0));
             }
         });
-
+        console.log(schedule);
         await db.insert(corsi).values({
             nome,
             descrizione,

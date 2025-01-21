@@ -21,6 +21,54 @@
         }
         loading = false;
     }
+
+    async function adminStatus(id) {
+        //endpoint: /api/admin/admin-status; method: POST; body: { id: id }
+        try {
+            const response = await fetch(`/api/admin/admin-status`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                fetchData(activeView);
+            } else {
+                error = data.message;
+            }
+        } catch (e) {
+            error = e.message;
+        }        
+    }
+
+    async function deleteCourse(id) {
+        //show a confirmation dialog
+        if (!confirm("Are you sure you want to delete this course?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/admin/deleteCourse`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                fetchData(activeView);
+            } else {
+                error = data.message;
+            }
+        } catch (e) {
+            error = e.message;
+        }        
+    }
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -67,6 +115,7 @@
                             {:else if activeView === 'courses'}
                                 <th class="px-6 py-3 text-left text-gray-700">Aula</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Gestisci</th>
+                                <th class="px-6 py-3 text-left text-gray-700">Elimina</th>
                             {:else if activeView === 'teachers'}
                             <th class="px-6 py-3 text-left text-gray-700">Email</th>
                                 <th class="px-6 py-3 text-left text-gray-700">
@@ -89,6 +138,13 @@
                                             {item.admin ? "Yes" : "No"}
                                         </span>
                                     </td>
+                                    <th class="px-6 py-3 text-left text-gray-700 ">
+                                        <button
+                                            class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded"
+                                            on:click={() => adminStatus(item.id)}>
+                                            {item.admin ? "Rimuovi da admin" : "Promuovi"}
+                                        </button>
+                                    </th>
                                 {:else if activeView === 'courses'}
                                     <td class="px-6 py-4">{item.aula}</td>
                                     
@@ -99,15 +155,17 @@
                                     </th>
                                     
                                     <th class="px-6 py-3 text-left text-gray-700 ">
-                                        <a href="/admin/corsi/{item.id}" class="bg-red hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
+                                        <button
+                                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                                            on:click={() => deleteCourse(item.id)}>
                                             Elimina
-                                        </a>
+                                        </button>
                                     </th>
                                 {:else if activeView === 'teachers'}
                                     <td class="px-6 py-4 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <a href="/admin/docenti/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
-                                            Gestisci
+                                            Impersona
                                         </a>
                                     </th>
     

@@ -3,7 +3,7 @@ import { db } from "$lib/db/db";
 import { studenti, corsi, professori, iscrizioni } from "$lib/db/models";
 import { eq } from "drizzle-orm";
 
-export async function GET({ params, locals }) {
+export async function POST({ request, locals }) {
   if (!locals.user) {
     return json({ success: false, message: "Unauthorized" }, { status: 401 });
   }
@@ -21,15 +21,14 @@ export async function GET({ params, locals }) {
   
   try {
     const { id } = await request.json();
+    console.log(id);
     
     const corso = await db.select().from(corsi).where(eq(corsi.id, id));
-
     // Delete all related registrations first
-    await db.delete(iscrizioni).where(eq(iscrizioni.corso, id));
-    
-    // Delete the course
-    await db.delete(corsi).where(eq(corsi.id, id));
+    await db.delete(iscrizioni).where(eq(iscrizioni.idCorso, id));
 
+    await db.delete(corsi).where(eq(corsi.id, id));
+    
     return json({ success: true, message: 'Course deleted successfully' });
 } catch (error) {
     console.error('Error:', error);

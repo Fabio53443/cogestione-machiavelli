@@ -4,7 +4,7 @@
     let showAlert = false;
     let alertMessage = "";
     let alertType;
-    const suffix = "@spallanzanitivoli.edu.it";
+    const suffix = "@liceomamiani.cloud";
 
     const handleLogin = async (event) => {
         event.preventDefault();

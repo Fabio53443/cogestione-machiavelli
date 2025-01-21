@@ -6,14 +6,15 @@ import { studenti } from '$lib/db/models';
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  `${process.env.VITE_PUBLIC_API_URL}/api/studenti/google/callback`
+  `${process.env.CF_PAGES_URL}/api/studenti/google/callback`
 );
 
 export async function GET({ url }) {
   const authorizeUrl = client.generateAuthUrl({
     access_type: 'offline',
     prompt: 'consent',
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
+    hd: 'liceomamiani.cloud',
   });
   throw redirect(302, authorizeUrl);
 }

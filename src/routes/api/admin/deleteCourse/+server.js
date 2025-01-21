@@ -22,7 +22,6 @@ export async function GET({ params, locals }) {
   try {
     const { id } = await request.json();
     
-    // Verify the course exists and belongs to the teacher
     const corso = await db.select().from(corsi).where(eq(corsi.id, id));
 
     // Delete all related registrations first

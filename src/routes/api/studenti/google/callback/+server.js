@@ -6,7 +6,7 @@ import { studenti } from '$lib/db/models';
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  `${process.env.VITE_PUBLIC_API_URL}/api/studenti/google/callback`
+  `${process.env.CF_PAGES_URL}/api/studenti/google/callback`
 );
 
 export async function GET({ url, cookies }) {
@@ -24,6 +24,8 @@ export async function GET({ url, cookies }) {
   const payload = ticket.getPayload();
   const email = payload.email;
   const name = payload.name;
+  const hd = payload.hd;
+  console.log(payload.hd);
   const googleId = payload.sub;
   // Insert or update user
   await db.insert(studenti).values({
@@ -37,7 +39,7 @@ export async function GET({ url, cookies }) {
   });
 
   //call the login endpoint to get the token
-  const response = await fetch(`${process.env.VITE_PUBLIC_API_URL}/api/studenti/login`, {
+  const response = await fetch(`${process.env.CF_PAGES_URL}/api/studenti/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

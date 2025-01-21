@@ -97,6 +97,12 @@
                                             Gestisci
                                         </a>
                                     </th>
+                                    
+                                    <th class="px-6 py-3 text-left text-gray-700 ">
+                                        <a href="/admin/corsi/{item.id}" class="bg-red hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
+                                            Elimina
+                                        </a>
+                                    </th>
                                 {:else if activeView === 'teachers'}
                                     <td class="px-6 py-4 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">

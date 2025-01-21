@@ -70,7 +70,7 @@
                             {:else if activeView === 'teachers'}
                             <th class="px-6 py-3 text-left text-gray-700">Email</th>
                                 <th class="px-6 py-3 text-left text-gray-700">
-                                    <a href="/admin/create-user" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                    <a href="/admin/docenti/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                                         Aggiungi
                                     </a>
                                 </th>

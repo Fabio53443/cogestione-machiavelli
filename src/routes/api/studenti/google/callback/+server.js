@@ -24,8 +24,6 @@ export async function GET({ url, cookies }) {
   const payload = ticket.getPayload();
   const email = payload.email;
   const name = payload.name;
-  const hd = payload.hd;
-  console.log(payload.hd);
   const googleId = payload.sub;
   // Insert or update user
   await db.insert(studenti).values({

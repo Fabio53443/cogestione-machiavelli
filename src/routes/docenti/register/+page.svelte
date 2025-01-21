@@ -7,7 +7,7 @@
     let alertType = "info";
     let emailInput = "";
     let emailInputElement;
-    const suffix = "@spallanzanitivoli.edu.it";
+    const suffix = "@liceomamiani.cloud";
 
     $: fullEmail = emailInput + suffix;
 
@@ -145,7 +145,7 @@
                     id="secretCode"
                     type="text"
                     name="secretCode"
-                    placeholder="Codice docente, chiedere a Giulio per informazioni"
+                    placeholder="Codice docente"
                     required
                 />
             </div>

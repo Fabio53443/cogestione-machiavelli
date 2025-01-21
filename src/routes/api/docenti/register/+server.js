@@ -8,10 +8,10 @@ export const POST = async ({ request }) => {
         const { nome, email, password, secretCode } = formData;
 
         if ( !nome || !email || !password) {
-            return json({ success: false, message: 'All fields are required.' }, { status: 400 });
+            return json({ success: false, message: 'Riempi tutti i campi.' }, { status: 400 });
         }
-        if (secretCode !== 'skibidi') {
-            return json({ success: false, message: 'Codice segreto mancante' }, { status: 403 });
+        if (secretCode !== 'ciao') {
+            return json({ success: false, message: 'Codice segreto sbagliato' }, { status: 403 });
         }
         // Log the form data for debugging
 

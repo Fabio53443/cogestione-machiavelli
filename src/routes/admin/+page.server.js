@@ -7,7 +7,7 @@ export const load = async ({ locals }) => {
     if (!locals.user) {
         throw redirect(302, '/login');
     }
-
+    
     const user = await db.select({
         admin: studenti.admin
     }).from(studenti).where(eq(studenti.id, locals.user.id));

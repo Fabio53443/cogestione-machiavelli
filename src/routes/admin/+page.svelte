@@ -95,6 +95,8 @@
             error = e.message;
         }        
     }
+    
+
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -189,6 +191,7 @@
                                             Elimina
                                         </button>
                                     </th>
+
                                 {:else if activeView === 'teachers'}
                                     <td class="px-6 py-4 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">

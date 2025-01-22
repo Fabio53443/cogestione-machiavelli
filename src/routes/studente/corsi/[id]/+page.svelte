@@ -182,7 +182,7 @@
                                 <span class="group-hover:hidden">✓</span>
                                 <span class="hidden group-hover:inline">Disiscriviti</span>
                               {:else if computeFreeSeats(dayIndex, timeIndex) === 0}
-                                Pieno
+                                N/D
                               {:else}
                                 Iscriviti
                               {/if}

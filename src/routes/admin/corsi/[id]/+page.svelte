@@ -29,6 +29,32 @@
       student.id === updatedStudent.id ? updatedStudent : student
     );
   }
+
+  async function fillCourse(id, dayIndex, timeIndex) {
+        //show a confirmation dialog
+        if (!confirm("Vuoi veramente riempire?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/admin/corso/presenze-forcefull`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id, dayIndex, timeIndex }),
+
+            });
+            const data = await response.json();
+            console.log(data.success);
+            if (data.success) {
+                location.reload();
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        
+  }
 </script>
 
 {#if error}
@@ -65,8 +91,9 @@
             <thead>
               <tr>
                 <th class="py-3 w-24 text-left pl-4 text-black">Ora</th>
-                <th class="py-3 text-left text-black">Posti</th>
+                <th class="py-3 text-left text-black">Posti occupati</th>
                 <th class="py-3 w-24 text-center pr-4 text-black">Azioni</th>
+                <th class="py-3 w-24 text-center pr-4 text-black">Riempi</th>
               </tr>
             </thead>
             <tbody>
@@ -81,8 +108,8 @@
                       <div class="relative flex-1 bg-gray-200 h-3 rounded">
                         <div
                           class={`absolute top-0 left-0 h-3 rounded ${barColor((hourSeats ?? 0), corso.numPosti)}`}
-                          style="width: {(((hourSeats ?? 0) / corso.numPosti) * 100)}%;"
-                        />
+                          style="width: {(((hourSeats ?? 0) / corso.numPosti) * 100)}%;"> </div>
+                        
                       </div>
                     </div>
                   </td>
@@ -94,6 +121,15 @@
                       Presenze
                     </button>
                   </td>
+                  <td class="py-3 text-right pr-7 pl-7">
+                    <button
+                      class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      on:click={() => fillCourse(corso.id, dayIndex, timeIndex)}
+                    >
+                      Riempi
+                    </button>
+                  </td>
+
                 </tr>
               {/each}
             </tbody>

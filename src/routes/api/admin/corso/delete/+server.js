@@ -7,7 +7,7 @@ export async function POST({ request, locals }) {
   if (!locals.user) {
     return json({ success: false, message: "Unauthorized" }, { status: 401 });
   }
-
+  
   const user = await db
     .select({
       admin: studenti.admin,

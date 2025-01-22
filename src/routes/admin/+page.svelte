@@ -46,13 +46,39 @@
 
     async function deleteCourse(id) {
         //show a confirmation dialog
-        if (!confirm("Are you sure you want to delete this course?")) {
+        if (!confirm("Vuoi veramente eliminare questo corso?")) {
             return;
         }
 
         try {
-            const response = await fetch(`/api/admin/deleteCourse`, {
+            const response = await fetch(`/api/admin/corso/delete`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                fetchData(activeView);
+            } else {
+                error = data.message;
+            }
+        } catch (e) {
+            error = e.message;
+        }        
+    }
+
+    async function deleteDocente(id) {
+        //show a confirmation dialog
+        if (!confirm("Vuoi veramente eliminare questo organizzatore?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/admin/docente`, {
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -123,6 +149,8 @@
                                         Aggiungi
                                     </a>
                                 </th>
+                                <th class="px-6 py-3 text-left text-gray-700">Elimina</th>
+
                             {/if}
                         </tr>
                     </thead>
@@ -167,6 +195,13 @@
                                         <a href="/admin/docenti/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
                                             Impersona
                                         </a>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-gray-700 ">
+                                        <button
+                                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                                            on:click={() => deleteDocente(item.id)}>
+                                            Elimina
+                                        </button>
                                     </th>
     
                                 {/if}

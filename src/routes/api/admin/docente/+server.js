@@ -1,8 +1,9 @@
 import { json } from '@sveltejs/kit'; // To send JSON responses
 import { db } from '$lib/db/db'; // Assuming you're using Drizzle ORM for your database
 import bcrypt from 'bcrypt'; // For hashing passwords
-import { professori, studenti } from '$lib/db/models';
+import { professori, studenti, iscrizioni, corsi } from '$lib/db/models';
 import { eq } from 'drizzle-orm';
+
 export const POST = async ({ request, locals }) => {
     try {
         const formData = await request.json();
@@ -50,3 +51,40 @@ export const POST = async ({ request, locals }) => {
         return json({ success: false, message: 'Registration failed.' }, { status: 500 });
     }
 };
+
+export const DELETE = async ({ request, locals }) => {
+  if (!locals.user) {
+    return json({ success: false, message: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await db
+    .select({
+      admin: studenti.admin,
+    })
+    .from(studenti)
+    .where(eq(studenti.id, locals.user.id));
+
+  if (!user[0].admin) {
+    throw redirect(302, "/studente/dashboard");
+  }
+  
+  try {
+    const { id } = await request.json();
+    console.log(id);
+    //delete all related iscrizioni for courses taught by the teacher
+    const corsiDocente = await db.select().from(corsi).where(eq(corsi.docente, id));
+    for (const corso of corsiDocente) {
+        await db.delete(iscrizioni).where(eq(iscrizioni.idCorso, corso.id));
+    }
+    //delete the courses
+    await db.delete(corsi).where(eq(corsi.docente, id));
+    //delete the teacher
+    await db.delete(professori).where(eq(professori.id, id));
+    
+    return json({ success: true, message: 'Course deleted successfully' });
+} catch (error) {
+    console.error('Error:', error);
+    return json({ success: false, message: 'Something went wrong' }, { status: 500 });
+}
+
+}

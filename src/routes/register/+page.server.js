@@ -1,5 +1,5 @@
+import { redirect } from "@sveltejs/kit";
+
 export function load() {
-    return {
-      pageName: 'Registrazione studente', 
-    };
+    throw redirect(302, "/login");
   }

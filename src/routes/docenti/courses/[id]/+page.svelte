@@ -58,9 +58,6 @@
       {#if corso.availability.includes(dayIndex)}
       <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-4 mb-4">
         <h2 class="text-xl text-black font-semibold mb-2">{day}</h2>
-        <p class="text-gray-600 mb-2"><strong>Numero di studenti iscritti:</strong> 
-          {corso.schedule[dayIndex].reduce((sum, hourSeats) => sum + (corso.numPosti - (hourSeats ?? 0)), 0)}
-        </p>
       <table class="w-full text-base">
             <thead>
               <tr>

@@ -7,9 +7,8 @@
     let alertType = "info";
     let emailInput = "";
     let emailInputElement;
-    const suffix = "@liceomamiani.cloud";
 
-    $: fullEmail = emailInput + suffix;
+    $: fullEmail = emailInput;
 
     onMount(() => {
         if (emailInputElement) {
@@ -108,11 +107,7 @@
                         required
                         bind:value={emailInput}
                     />
-                    <span
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
-                    >
-                        {suffix}
-                    </span>
+
                 </div>
             </div>
             <div class="mb-4">

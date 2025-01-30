@@ -23,7 +23,7 @@
         const password = event.target.elements.password.value;
 
         try {
-            const response = await fetch("/api/admin/doc-reg", {
+            const response = await fetch("/api/admin/docente/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -29,28 +29,23 @@ export const POST = async ({ locals, request }) => {
     }
     try {
         const formData = await request.json();
-        const { nome, descrizione, aula, numPosti, length, availability  } = formData;
+        const { nome, descrizione, aula, numPosti, availability, length  } = formData;
         
 
         if (!nome || !descrizione || !aula || !numPosti || !availability || !length) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
-        
         let schedule = [
-            Array(6).fill(0),
-            Array(6).fill(0),
-            Array(6).fill(0),
-            Array(6).fill(0),
-            Array(6).fill(0),
-            Array(6).fill(0)
+            Array(2).fill(0),
+            Array(2).fill(0),
+            Array(2).fill(0),
+            Array(2).fill(0),
+            Array(2).fill(0),
+            Array(2).fill(0)
         ];
         
         availability.forEach(day => {
-            if (day === 1 || day === 4) {
-                schedule[day] = Array(6).fill(numPosti);
-            } else {
-                schedule[day] = Array(4).fill(numPosti).concat(Array(2).fill(0));
-            }
+                schedule[day] = Array(2).fill(numPosti);
         });
         console.log(schedule);
         await db.insert(corsi).values({

@@ -21,8 +21,8 @@ export const studenti = pgTable("studenti", {
   nomeCompleto: varchar("nome_completo", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   hashedPass: text("hashed_pass").notNull(),
-  googleId: text("google_id").notNull().unique(),
   admin: boolean("admin").notNull().default(false),
+  classe: varchar("classe", { length: 10 }),
 });
 
 export const corsi = pgTable("corsi", {
@@ -45,12 +45,10 @@ export const corsi = pgTable("corsi", {
     .array()
     .default(
       sql`ARRAY[
-      ARRAY[0, 0, 0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0, 0, 0],
-            ARRAY[0, 0, 0, 0, 0, 0]
+      ARRAY[0, 0], 
+      ARRAY[0, 0], 
+      ARRAY[0, 0], 
+      ARRAY[0, 0]
 ]::integer[][]`
     ),
 });

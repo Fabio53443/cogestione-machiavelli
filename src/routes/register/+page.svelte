@@ -7,9 +7,8 @@
     let alertType = "info";
     let emailInput = "";
     let emailInputElement;
-    const suffix = "@spallanzanitivoli.edu.it";
 
-    $: fullEmail = emailInput + suffix;
+    $: fullEmail = emailInput;
 
     onMount(() => {
         if (emailInputElement) {
@@ -22,6 +21,7 @@
 
         const nome = event.target.elements.nome.value;
         const password = event.target.elements.password.value;
+        const classe = event.target.elements.classe.value;
 
         try {
             const response = await fetch("/api/studenti/register", {
@@ -33,6 +33,7 @@
                     nome,
                     email: fullEmail,
                     password,
+                    classe,
                 }),
             });
 
@@ -72,24 +73,41 @@
             on:submit={handleRegister}
             class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
         >
-            <div class="mb-4">
+        <div class="mb-4">
                 
-                <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="nome"
-                >
-                    Nome completo
-                </label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                    id="nome"
-                    type="text"
-                    name="nome"
-                    placeholder="Nome utente"
-                    required
-                />
-            </div>
-            <div class="mb-4">
+            <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="nome"
+            >
+                Nome completo
+            </label>
+            <input
+                class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                id="nome"
+                type="text"
+                name="nome"
+                placeholder="Nome utente"
+                required
+            />
+        </div>
+        <div class="mb-4">
+                
+            <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="nome"
+            >
+                Classe
+            </label>
+            <input
+                class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                id="classe"
+                type="text"
+                name="classe"
+                placeholder="es. 4E"
+                required
+            />
+        </div>
+    <div class="mb-4">
                 <label
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="email"
@@ -107,11 +125,6 @@
                         required
                         bind:value={emailInput}
                     />
-                    <span
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
-                    >
-                        {suffix}
-                    </span>
                 </div>
             </div>
             <div class="mb-6">

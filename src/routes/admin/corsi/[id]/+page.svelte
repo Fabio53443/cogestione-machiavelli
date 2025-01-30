@@ -87,7 +87,7 @@
       <table class="w-full text-base">
             <thead>
               <tr>
-                <th class="py-3 w-24 text-left pl-4 text-black">Ora</th>
+                <th class="py-3 w-24 text-left pl-4 text-black">Turno</th>
                 <th class="py-3 text-left text-black">Posti occupati</th>
                 <th class="py-3 w-24 text-center pr-4 text-black">Azioni</th>
                 <th class="py-3 w-24 text-center pr-4 text-black">Riempi</th>

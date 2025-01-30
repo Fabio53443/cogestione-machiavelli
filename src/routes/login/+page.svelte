@@ -4,11 +4,10 @@
     let showAlert = false;
     let alertMessage = "";
     let alertType;
-    const suffix = "@spallanzanitivoli.edu.it";
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const username = event.target.elements.username.value + suffix;
+        const username = event.target.elements.username.value;
         const password = event.target.elements.password.value;
         try {
             const response = await fetch("/api/studenti/login", {
@@ -49,18 +48,61 @@
     class="container mx-auto flex flex-col items-center justify-start pt-16 px-4"
 >
     <h1 class="text-3xl font-bold text-center text-[#FB773C] mb-8">Accedi</h1>
-    <div class="w-full max-w-md bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-    <p class="text-xl text-center text-gray-600 mb-4"> Accedi con il tuo Account Google <b>Istituzionale</b></p>
-
-            <!-- Add a Google SSO button -->
-            <div class="flex items-center justify-between mt-4">
-                <a
-                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center"
-                    href="/api/studenti/google"
+    <div class="w-full max-w-md">
+        <form
+            on:submit={handleLogin}
+            class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
+        >
+            <div class="mb-4">
+                <label
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                    for="username"
                 >
-                    Accedi con Google
-                </a>
+                    Email
+                </label>
+                <div class="relative">
+                    <input
+                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="Email"
+                        required
+                    />
+                </div>
+            </div>
+            <div class="mb-6">
+                <label
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                    for="password"
+                >
+                    Password
+                </label>
+                <input
+                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="******************"
+                    required
+                />
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full transition duration-200"
+                    type="submit"
+                >
+                    Accedi
+                </button>
+            </div>
+            <div class="flex items-center justify-between">
+                <p class="text-gray-600 text-sm mt-4 text-center"
+                    
+                >
+                    Non sei ancora registrato? Fallo qui: <a href="/register" class="text-[#FB773C] hover:text-[#FB773C] transition duration-200 font-semibold ">Registrati</a>
+            </p>
             </div>
             
+        </form>
     </div>
 </div>

@@ -5,9 +5,9 @@ import { studenti } from '$lib/db/models';
 export const POST = async ({ request }) => {
     try {
         const formData = await request.json();
-        const {  nome, email, password } = formData;
-
-        if ( !nome || !email || !password) {
+        const {  nome, email, password, classe } = formData;
+        console.log('Form Data:', formData);
+        if ( !nome || !email || !password || !classe) {
             return json({ success: false, message: 'All fields are required.' }, { status: 400 });
         }
 
@@ -24,7 +24,8 @@ export const POST = async ({ request }) => {
             
             nomeCompleto: nome,
             email,
-            hashedPass: hashedPassword
+            hashedPass: hashedPassword, 
+            classe,
         });
 
         return json({ success: true, message: 'User registered successfully!' });

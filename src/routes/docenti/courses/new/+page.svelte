@@ -151,30 +151,11 @@
         />
       </div>
 
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="length">
-          Durata (ore ogni giorno)
-        </label>
-        <div class="flex items-center gap-4">
-          <input
-        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FB773C]"
-        id="length"
-        type="range"
-        min="1"
-        max="3"
-        bind:value={formData.length}
-        required
-          />
-          <span class="text-gray-700 font-medium min-w-[80px] text-center bg-gray-100 rounded-lg px-3 py-1">
-        {formData.length} {formData.length === 1 ? 'ora' : 'ore'}
-          </span>
-        </div>
-      </div>
 
       <div class="mb-6">
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <label class="block text-gray-700 text-sm font-bold mb-2">
-          Tua disponibilità
+          Giorno
         </label>
         <div class="grid grid-cols-2 gap-2">
           {#each giorni as giorno}

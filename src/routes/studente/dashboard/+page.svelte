@@ -44,7 +44,7 @@
     </div>
 
     <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-      <h2 class="text-2xl font-semibold text-gray-700 mb -6">Benvenuto, {user.nome_completo}!</h2>
+      <h2 class="text-2xl font-semibold text-gray-700 mb -6">Benvenuto!</h2>
       <p class="text-gray-600 mb-4">Qui sotto puoi visualizzare i corsi a cui sei iscritto.</p>
       
       {#if error}
@@ -76,12 +76,6 @@
                     <h5 class="text-lg font-semibold text-[#FB773C] mb-2">{corso.nome}</h5>
                     <p class="text-gray-600 mb-3">{corso.descrizione}</p>
                     <p class="text-gray-700"><span class="font-semibold">Aula:</span> {corso.aula}</p>
-                    <button
-                      class="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline transition duration-200"
-                      on:click={() => unenroll(corso.id, corso.giorno, corso.ora)}
-                    >
-                      Disiscriviti
-                    </button>
                   </div>
                 </li>
               {/each}

@@ -4,11 +4,10 @@
     let showAlert = false;
     let alertMessage = "";
     let alertType;
-    const suffix = "@liceomamiani.cloud";
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const username = event.target.elements.username.value + suffix;
+        const username = event.target.elements.username.value;
         const password = event.target.elements.password.value;
         try {
             const response = await fetch("/api/docenti/login", {
@@ -70,11 +69,6 @@
                         placeholder="email"
                         required
                     />
-                    <span
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none"
-                    >
-                        {suffix}
-                    </span>
                 </div>
             </div>
             <div class="mb-6">

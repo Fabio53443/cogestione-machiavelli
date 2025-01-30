@@ -19,7 +19,7 @@
       </div>
   
       <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h2 class="text-xl font-semibold text-gray-700 mb-6">Benvenuto, {user.username}</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-6">Benvenuto</h2>
         
         {#if error}
           <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">

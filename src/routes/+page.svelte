@@ -1,7 +1,6 @@
 
 
 <div class="max-w-2xl mx-auto text-center">
-    <img src="/favicon.png" alt="Logo" class="w-60 mx-auto mb-4" />
     <h1 class="text-4xl font-bold mb-6 text-[#FB773C]">
         Benvenuto all'autogestione del Liceo Machiavelli
     </h1>

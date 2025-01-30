@@ -58,7 +58,7 @@
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="username"
                 >
-                    Email
+                    Username
                 </label>
                 <div class="relative">
                     <input
@@ -66,7 +66,7 @@
                         id="username"
                         type="text"
                         name="username"
-                        placeholder="email"
+                        placeholder="Username"
                         required
                     />
                 </div>

@@ -3,7 +3,7 @@
     import favicon from "../favicon.png";
     import { page } from "$app/stores";
     import { onMount } from "svelte";
-    import { HomeOutline, UserOutline } from "flowbite-svelte-icons";
+    import { HomeOutline, UserCircleOutline, ArrowLeftToBracketOutline, ArrowRightToBracketOutline, UserSettingsOutline  } from "flowbite-svelte-icons";
     $: pageName = $page.data.pageName;
     $: user = $page.data.user;
 </script>
@@ -28,7 +28,7 @@
                         </a>
                     {/if}
                     
-                    <h1 class="text-3xl font-bold text-[#f5c2e7]">
+                    <h1 class="text-3xl font-bold text-[#cdd6f4]">
                         {pageName}
                     </h1>
                 </div>
@@ -36,14 +36,14 @@
                 <nav class="flex space-x-4">
                     <a
                         href="/login"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Accedi</a
+                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Accedi <ArrowLeftToBracketOutline class="w-5 h-5 ml-1" /></a
                     >
                     
                     <a
                         href="/docenti"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Portale Organizzatori</a
+                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Portale Organizzatori <UserSettingsOutline class="w-5 h-5 ml-1"/> </a
                     >
                 </nav>
                 {:else if user.role === "studente"}
@@ -51,14 +51,14 @@
 
                     <a
                         href="/logout"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Esci</a
+                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Esci <ArrowRightToBracketOutline class="w-5 h-5 ml-1" /></a
                     >
 
                     <a
                         href="/studente/profile"
-                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Profilo</a
+                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Profilo <UserCircleOutline class="w-5 h-5 ml-1" /> </a
                     >
                 </nav>
 

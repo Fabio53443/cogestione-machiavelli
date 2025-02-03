@@ -33,7 +33,6 @@
                 body: JSON.stringify({ id }),
             });
             const data = await response.json();
-            console.log(data);
             if (data.success) {
                 fetchData(activeView);
             } else {
@@ -59,7 +58,6 @@
                 body: JSON.stringify({ id }),
             });
             const data = await response.json();
-            console.log(data);
             if (data.success) {
                 fetchData(activeView);
             } else {
@@ -85,7 +83,6 @@
                 body: JSON.stringify({ id }),
             });
             const data = await response.json();
-            console.log(data);
             if (data.success) {
                 fetchData(activeView);
             } else {

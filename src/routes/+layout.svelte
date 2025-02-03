@@ -3,9 +3,9 @@
     import favicon from "../favicon.png";
     import { page } from "$app/stores";
     import { onMount } from "svelte";
+    import { HomeOutline, UserOutline } from "flowbite-svelte-icons";
     $: pageName = $page.data.pageName;
     $: user = $page.data.user;
-
 </script>
 
 <svelte:head>
@@ -16,6 +16,7 @@
     <header class="bg-gradient-to-r from-[#1e1e2e] via-[#181825] to-[#1e1e2e] shadow-lg shadow-[#11111b]/20">
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col sm:flex-row items-center justify-between">
+
                 <div class="flex items-center mb-4 sm:mb-0">
                     {#if pageName != "Autogestione"}
                         <a
@@ -23,7 +24,7 @@
                             class="text-3xl text-[#cdd6f4] mr-4 hover:text-[#f5c2e7] transition-colors duration-300"
                             aria-label="Home"
                         >
-                            🏠
+                            <HomeOutline class="w-8 h-8" />
                         </a>
                     {/if}
                     
@@ -38,7 +39,7 @@
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Accedi</a
                     >
-
+                    
                     <a
                         href="/docenti"
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
@@ -52,6 +53,12 @@
                         href="/logout"
                         class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
                         >Esci</a
+                    >
+
+                    <a
+                        href="/studente/profile"
+                        class="text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                        >Profilo</a
                     >
                 </nav>
 

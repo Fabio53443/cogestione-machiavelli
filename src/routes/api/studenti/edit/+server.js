@@ -28,7 +28,7 @@ export const POST = async ({ locals, request }) => {
 
     return json({ success: true, message: 'User edited.' });
   } catch (error) {
-    console.error('Edit Error:', error);
+    console.error('Edit Erroraaaaa:', error);
     return json({ success: false, message: 'User not edited; error.' }, { status: 500 });
   }
 };

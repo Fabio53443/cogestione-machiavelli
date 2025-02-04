@@ -53,12 +53,18 @@ export async function GET({ params, locals }) {
   const pdfPromise = new Promise(resolve => {
     doc.on("end", () => resolve(Buffer.concat(chunks)));
   });
-
+  // add page number on all pages in footer
+  doc.on("pageAdded", () => {
+    doc.fontSize(8).text(doc.page, 0, doc.page.height - 10, { align: "right" });
+  });
   // Add course details header
   doc.fontSize(18).text(course.nome, { underline: true });
   doc.moveDown();
   doc.fontSize(12).text(`Descrizione: ${course.descrizione || "N/A"}`);
   doc.text(`Aula: ${course.aula || "N/A"}`);
+  doc.text(`Capienza: ${course.numPosti || "N/A"}`);
+  doc.moveDown();
+  doc.text("Aggiornato al: " + new Date().toLocaleString("it-IT"));
   doc.moveDown();
 
   // Iterate through grouped iscrizioni and add details
@@ -68,7 +74,7 @@ export async function GET({ params, locals }) {
       doc.fontSize(14).text(`  Turno: ${Number(ora)+1}`);
       doc.fontSize(12).text("Nome -- Classe -- Email", { underline: true });
       grouped[giorno][ora].forEach(item => {
-        doc.text(`    • ${item.nomeCompleto} -- ${item.classe || "-"} --${item.email}`);
+        doc.text(`    • ${item.nomeCompleto} -- ${item.classe || "-"} -- ${item.email}`);
       });
       doc.moveDown();
     }

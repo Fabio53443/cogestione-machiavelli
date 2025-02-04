@@ -23,7 +23,6 @@
     }
 
     async function adminStatus(id) {
-        //endpoint: /api/admin/admin-status; method: POST; body: { id: id }
         try {
             const response = await fetch(`/api/admin/admin-status`, {
                 method: "POST",
@@ -59,6 +58,15 @@
             });
             const data = await response.json();
             if (data.success) {
+                //download the file
+                const url = window.URL.createObjectURL(new Blob([data.file]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `corso_${id}_deleted.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
                 fetchData(activeView);
             } else {
                 error = data.message;
@@ -66,6 +74,28 @@
         } catch (e) {
             error = e.message;
         }        
+    }
+
+    async function getIscrizioni(id) {
+        try {
+            const response = await fetch(`/api/admin/corso/pdf-iscrizioni`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ courseId: id }),
+            });
+            const data = await response.json();
+            if (data.success) {
+                fetchData(activeView);
+            } else {
+                error = data.message;
+            }
+        } catch (e) {
+            error = e.message;
+        }        
+
+        
     }
 
     async function deleteDocente(id) {
@@ -141,6 +171,7 @@
                                 <th class="px-6 py-3 text-left text-gray-700">Aula</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Gestisci</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Elimina</th>
+                                <th class="px-6 py-3 text-left text-gray-700">Iscrizioni</th>                                
                             {:else if activeView === 'teachers'}
                             <th class="px-6 py-3 text-left text-gray-700">Email</th>
                                 <th class="px-6 py-3 text-left text-gray-700">
@@ -180,6 +211,7 @@
                                             Gestisci
                                         </a>
                                     </th>
+    
                                     
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <button
@@ -188,12 +220,18 @@
                                             Elimina
                                         </button>
                                     </th>
+                                    
+                                    <th class="px-6 py-3 text-left text-gray-700 ">
+                                        <a href="/api/admin/corso/pdf-iscrizioni/{item.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                            Iscrizioni
+                                        </a>
+                                    </th>
 
                                 {:else if activeView === 'teachers'}
                                     <td class="px-6 py-4 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <a href="/admin/docenti/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
-                                            Impersona
+                                            Iscrizioni
                                         </a>
                                     </th>
                                     <th class="px-6 py-3 text-left text-gray-700 ">

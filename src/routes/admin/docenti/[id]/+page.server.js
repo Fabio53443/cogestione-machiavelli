@@ -2,24 +2,12 @@ import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/db/db.js';
 import { eq } from 'drizzle-orm';
 import { corsi, professori, studenti } from '$lib/db/models.js';
-import { afterNavigate } from '$app/navigation';
+import { isAdmin } from '$lib/isAdmin';
 
 export async function load({ params, locals }) {
-  const id = parseInt(params.id, 10);
-  if (!locals.user) {
-    throw redirect(302, "/login");
-  }
-
-  const user = await db
-    .select({
-      admin: studenti.admin,
-    })
-    .from(studenti)
-    .where(eq(studenti.id, locals.user.id));
-
-  if (!user[0].admin) {
-    throw redirect(302, "/studente/dashboard");
-  }
+  if (!(await isAdmin(locals))) {
+    throw redirect(302, '/studente/dashboard');
+  }   
   const info_docente = await db
     .select({
       nome: professori.nomeCompleto,

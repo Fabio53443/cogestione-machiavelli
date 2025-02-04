@@ -114,7 +114,7 @@
 
     :global(body) {
         font-family: "Inter", sans-serif;
-        color: #4764c2;
+        color: #213574;
         margin: 0;
         background: #1e1e2e;
     }

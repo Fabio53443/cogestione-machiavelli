@@ -32,6 +32,7 @@
     "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
     "lightningcss": "^1.29.1",
+    "pdfkit": "^0.16.0",
     "postgres": "^3.4.5",
     "svelte-preprocess": "^6.0.3"
   },

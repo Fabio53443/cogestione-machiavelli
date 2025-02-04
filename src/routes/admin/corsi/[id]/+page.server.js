@@ -1,26 +1,15 @@
 import { db } from "$lib/db/db.js";
-import { corsi, studenti } from "$lib/db/models.js";
+import { corsi } from "$lib/db/models.js";
 import { eq } from "drizzle-orm";
+import { isAdmin } from "$lib/isAdmin";
 import { redirect } from '@sveltejs/kit';
 
 
 export async function load({ params, locals }) {
   const courseId = parseInt(params.id, 10);
-  if (!locals.user) {
-    throw redirect(302, "/login");
-  }
-
-  const user = await db
-    .select({
-      admin: studenti.admin,
-    })
-    .from(studenti)
-    .where(eq(studenti.id, locals.user.id));
-
-  if (!user[0].admin) {
-    throw redirect(302, "/studente/dashboard");
-  }
-
+  if (!(await isAdmin(locals))) {
+    throw redirect(302, '/studente/dashboard');
+}   
   // Load the specific course by ID, ensuring it belongs to the logged-in teacher
   const [course] = await db.select().from(corsi).where(eq(corsi.id, courseId));
 

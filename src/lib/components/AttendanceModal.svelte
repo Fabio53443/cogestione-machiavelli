@@ -81,7 +81,7 @@
 
 {#if show}
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-  <div class="bg-white rounded-lg max-w-6xl w-full">
+  <div class="bg-white rounded-lg max-w-6xl w-full shadow-lg">
     <!-- Header Bar -->
     <div class="flex items-center justify-between px-6 py-3 border-b bg-gray-50">
       <h2 class="text-xl font-bold text-gray-800">Appello</h2>
@@ -135,8 +135,9 @@
         />
       </div>
       <div class="col-span-3">Name</div>
-      <div class="col-span-5">Email</div>
-      <div class="col-span-3">Status</div>
+      <div class="col-span-2">Class</div>
+      <div class="col-span-4">Email</div>
+      <div class="col-span-2">Status</div>
     </div>
 
     <!-- Student List -->
@@ -154,7 +155,10 @@
           <div class="col-span-3 font-medium text-gray-900">
             {student.studentName || 'N/A'}
           </div>
-          <div class="col-span-5">
+          <div class="col-span-2">
+            {student.classe || '—'}
+          </div>
+          <div class="col-span-4">
             {#if student.studentEmail}
               <a 
                 href="mailto:{student.studentEmail}" 
@@ -166,7 +170,7 @@
               <span class="text-gray-400">No email provided</span>
             {/if}
           </div>
-          <div class="col-span-3">
+          <div class="col-span-2">
             <button
               class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5"
               class:bg-green-100={student.presente}

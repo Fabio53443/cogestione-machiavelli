@@ -17,18 +17,20 @@ export async function GET({ params, url }) {
         eq(iscrizioni.giorno, day)
       )
     );
-    for (let i = 0; i < attendance.length; i++) {
-        const student = await db.select({
-            nomeCompleto: studenti.nomeCompleto,
-            email: studenti.email
-        })
-        .from(studenti)
-        .where(eq(studenti.id, attendance[i].idStudente))
-        .limit(1);
+  for (let i = 0; i < attendance.length; i++) {
+    const student = await db.select({
+        nomeCompleto: studenti.nomeCompleto,
+        email: studenti.email,
+        classe: studenti.classe
+    })
+    .from(studenti)
+    .where(eq(studenti.id, attendance[i].idStudente))
+    .limit(1);
 
-        attendance[i].studentName = student[0].nomeCompleto;
-        attendance[i].studentEmail = student[0].email;
-    }
+    attendance[i].studentName = student[0].nomeCompleto;
+    attendance[i].studentEmail = student[0].email;
+    attendance[i].classe = student[0].classe;
+  }
   return json(attendance);
 }
 
@@ -40,15 +42,18 @@ export async function PUT({ params, request }) {
     .set({ presente: present })
     .where(eq(iscrizioni.id, studentId))
     .returning();
-    const student = await db.select({
-        nomeCompleto: studenti.nomeCompleto,
-        email: studenti.email
-    })
-    .from(studenti)
-    .where(eq(studenti.id, updated[0].idStudente))
-    .limit(1);
+  
+  const student = await db.select({
+      nomeCompleto: studenti.nomeCompleto,
+      email: studenti.email,
+      classe: studenti.classe
+  })
+  .from(studenti)
+  .where(eq(studenti.id, updated[0].idStudente))
+  .limit(1);
 
-    updated[0].studentName = student[0].nomeCompleto;
-    updated[0].studentEmail = student[0].email;
+  updated[0].studentName = student[0].nomeCompleto;
+  updated[0].studentEmail = student[0].email;
+  updated[0].classe = student[0].classe;
   return json(updated[0]);
 }

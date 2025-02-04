@@ -157,7 +157,7 @@
                 {error}
             </div>
         {:else if activeView && listData.length > 0}
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto text-gray-700">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-100">
                         <tr>
@@ -187,11 +187,11 @@
                     <tbody>
                         {#each listData as item}
                             <tr class="border-t hover:bg-gray-50">
-                                <td class="px-6 py-4">{item.id}</td>
-                                <td class="px-6 py-4">{item.nomeCompleto || item.nome}</td>
+                                <td class="px-6 py-4 text-gray-700">{item.id}</td>
+                                <td class="px-6 py-4 text-gray-700">{item.nomeCompleto || item.nome}</td>
                                 {#if activeView === 'students'}
-                                    <td class="px-6 py-4">{item.email}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4" text-gray-700>{item.email}</td>
+                                    <td class="px-6 py-4 text-gray-700">
                                         <span class={item.admin ? "text-green-600" : "text-red-600"}>
                                             {item.admin ? "Yes" : "No"}
                                         </span>
@@ -204,7 +204,7 @@
                                         </button>
                                     </th>
                                 {:else if activeView === 'courses'}
-                                    <td class="px-6 py-4">{item.aula}</td>
+                                    <td class="px-6 py-4 text-gray-700">{item.aula}</td>
                                     
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <a href="/admin/corsi/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
@@ -228,7 +228,7 @@
                                     </th>
 
                                 {:else if activeView === 'teachers'}
-                                    <td class="px-6 py-4 ">{item.email}</td>
+                                    <td class="px-6 py-4 text-gray-700 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <a href="/admin/docenti/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
                                             Iscrizioni

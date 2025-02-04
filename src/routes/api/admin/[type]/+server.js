@@ -2,23 +2,14 @@ import { json } from "@sveltejs/kit";
 import { db } from "$lib/db/db";
 import { studenti, corsi, professori } from "$lib/db/models";
 import { eq } from "drizzle-orm";
+import { isAdmin } from "$lib/isAdmin";
 
 export async function GET({ params, locals }) {
-  if (!locals.user) {
+  if (!(await isAdmin(locals))) {
     return json({ success: false, message: "Unauthorized" }, { status: 401 });
-  }
+}   
 
-  const user = await db
-    .select({
-      admin: studenti.admin,
-    })
-    .from(studenti)
-    .where(eq(studenti.id, locals.user.id));
-
-  if (!user[0].admin) {
-    throw redirect(302, "/studente/dashboard");
-  }
-  try {
+try {
     let items = [];
     switch (params.type) {
       case "students":

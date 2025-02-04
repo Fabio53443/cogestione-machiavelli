@@ -34,17 +34,19 @@
                 </div>
                 {#if !user}
                 <nav class="flex space-x-4">
+
+                    <a
+                    href="/docenti"
+                    class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
+                    >Organizzatori <UserSettingsOutline class="w-5 h-5 ml-1"/> </a
+                >
+
                     <a
                         href="/login"
-                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Accedi <ArrowLeftToBracketOutline class="w-5 h-5 ml-1" /></a
+                        class="outline rounded-lg flex items-center text-[#cdd6f4] hover:text-[#1a1a28] hover:bg-[#cdd6f4] transition-all duration-300 text-lg hover:scale-105 px-2 py-1"
+                        >Accedi <ArrowLeftToBracketOutline class="w-5 h-5" /></a
                     >
                     
-                    <a
-                        href="/docenti"
-                        class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                        >Portale Organizzatori <UserSettingsOutline class="w-5 h-5 ml-1"/> </a
-                    >
                 </nav>
                 {:else if user.role === "studente"}
                 <nav class="flex space-x-4">

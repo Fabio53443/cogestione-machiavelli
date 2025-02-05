@@ -1,6 +1,7 @@
 <script>
   export let data;
   const { user, corsi, error } = data;
+  import Alert from "$lib/components/Alert.svelte";
   let giorni = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
   const navigateToRegistration = () => {
     window.location.href = '/studente/corsi';
@@ -27,7 +28,9 @@
       alert('Unenrollment failed.');
     }
   };
-
+  let showAlert = true;
+  let alertType = 'error';
+  let alertMessage = 'DEVI ESSERE REGISTRATO CON NOME E COGNOME! Se non lo sei, cambia il nome in Menu > Profilo!';
   $: coursesPerDay = corsi.reduce((acc, corso) => {
     const day = corso.giorno;
     if (!acc[day]) acc[day] = [];
@@ -35,12 +38,12 @@
     return acc;
   }, {});
 </script>
-
+<Alert type={alertType} message={alertMessage} show={showAlert} />
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
   <div class="w-full max-w-4xl">
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-[#FB773C]">I tuoi corsi</h1>
-      <a href="/studente/corsi"         class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"> Iscriviti ai corsi</a>
+      <a href="/studente/corsi" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200"> Iscriviti ai corsi</a>
     </div>
 
     <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">

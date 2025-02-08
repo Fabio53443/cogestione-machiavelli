@@ -22,3 +22,4 @@ vite.config.ts.timestamp-*
 
 bun.lockb
 /src/routes/api/studenti/google
+.vscode/settings.json

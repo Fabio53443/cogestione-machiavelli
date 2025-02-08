@@ -21,7 +21,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-between">
 
                 <div class="flex items-center mb-4 sm:mb-0">
-                    {#if pageName != "Autogestione"}
+                    {#if pageName != "Cogestione"}
                         <a
                             href="/"
                             class="text-3xl text-[#cdd6f4] mr-4 hover:text-[#f5c2e7] transition-colors duration-300"

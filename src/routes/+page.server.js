@@ -9,6 +9,6 @@ export function load( { locals }) {
       }
 
     return {
-      pageName: 'Autogestione', 
+      pageName: 'Cogestione', 
     };
   }

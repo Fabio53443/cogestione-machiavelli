@@ -9,10 +9,6 @@
   <div class="w-full max-w-md">
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-[#FB773C]">Il tuo profilo</h1>
-      <a href="/studente/profile/edit" class="flex items-center bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">
-        Modifica
-        <EditOutline class="w-5 h-5 ml-2 " />
-    </a>
     </div>
     <div class="bg-white p-6 rounded-lg shadow-md max-w-md">
         <div class="mb-4">

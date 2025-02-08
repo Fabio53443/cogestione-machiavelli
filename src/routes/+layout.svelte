@@ -60,7 +60,6 @@
                     </button>
                     {#if dropdownOpen}
                         <div class="absolute right-0 mt-2 bg-[#1e1e2e] shadow-lg rounded">
-                            <a href="/studente/profile" class="flex items-center block px-4 py-2 text-[#cdd6f4] hover:bg-[#181825]"><UserCircleOutline class="w-4 h-4 mr-2"/>  Profilo  </a>
                             <a href="/logout" class="flex items-center block px-4 py-2 text-[#cdd6f4] hover:bg-[#181825]"><ArrowRightToBracketOutline class="w-4 h-4 mr-2"/>  Esci  </a>
                         </div>
                     {/if}

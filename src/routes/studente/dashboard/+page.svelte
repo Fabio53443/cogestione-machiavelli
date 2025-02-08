@@ -28,9 +28,6 @@
       alert('Unenrollment failed.');
     }
   };
-  let showAlert = true;
-  let alertType = 'error';
-  let alertMessage = 'DEVI ESSERE REGISTRATO CON NOME E COGNOME! Se non lo sei, cambia il nome in Menu > Profilo!';
   $: coursesPerDay = corsi.reduce((acc, corso) => {
     const day = corso.giorno;
     if (!acc[day]) acc[day] = [];
@@ -38,7 +35,6 @@
     return acc;
   }, {});
 </script>
-<Alert type={alertType} message={alertMessage} show={showAlert} />
 <div class="container mx-auto flex flex-col items-center justify-start pt-16 px-4">
   <div class="w-full max-w-4xl">
     <div class="flex justify-between items-center mb-8">

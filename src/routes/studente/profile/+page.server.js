@@ -16,7 +16,6 @@ export async function load({ locals }) {
       pageName: 'Il tuo profilo',
       user: locals.user,
         nomeCompleto: user[0].nomeCompleto,
-        classe: user[0].classe,
         email: user[0].email,
     };
   } catch (error) {

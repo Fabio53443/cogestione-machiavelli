@@ -1,6 +1,6 @@
 <script>
   export let data;
-  const { user, nomeCompleto, classe, email } = data;
+  const { user, nomeCompleto, email } = data;
   import { EditOutline } from 'flowbite-svelte-icons';
 
 </script>
@@ -18,12 +18,8 @@
         <div class="mb-4">
             <h2 class="text-lg font-semibold text-gray-700">Nome e Cognome: </h2>
             <p class="text-lg text-gray-600">{nomeCompleto}</p>
-            <h2 class="text-lg font-semibold text-gray-700 mt-4">Classe: </h2>
-            <p class="text-lg text-gray-600">{classe}</p>
             <h2 class="text-lg font-semibold text-gray-700 mt-4">Email: </h2>
             <p class="text-lg text-gray-600">{email}</p>
-
-
         </div>
     </div>
   </div>

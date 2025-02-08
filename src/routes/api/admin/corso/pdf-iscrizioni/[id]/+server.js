@@ -30,7 +30,6 @@ export async function GET({ params, locals }) {
       ora: iscrizioni.ora,
       // fields from studenti
       nomeCompleto: studenti.nomeCompleto,
-      classe: studenti.classe,
       email: studenti.email
     })
     .from(iscrizioni)
@@ -72,9 +71,9 @@ export async function GET({ params, locals }) {
     doc.fontSize(16).text(`Giorno: ${Number(giorno)+1}`);
     for (const ora of Object.keys(grouped[giorno]).sort((a, b) => a - b)) {
       doc.fontSize(14).text(`  Turno: ${Number(ora)+1}`);
-      doc.fontSize(12).text("Nome -- Classe -- Email", { underline: true });
+      doc.fontSize(12).text("Nome -- Email", { underline: true });
       grouped[giorno][ora].forEach(item => {
-        doc.text(`    • ${item.nomeCompleto} -- ${item.classe || "-"} -- ${item.email}`);
+        doc.text(`    • ${item.nomeCompleto}  -- ${item.email}`);
       });
       doc.moveDown();
     }

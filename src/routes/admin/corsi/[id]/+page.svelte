@@ -46,7 +46,6 @@
 
             });
             const data = await response.json();
-            console.log(data.success);
             if (data.success) {
                 location.reload();
             }

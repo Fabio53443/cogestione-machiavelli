@@ -25,8 +25,6 @@ export async function POST({ locals, request }) {
     return json({ success: false, message: "Id is required" }, { status: 400 });
   }
   // promote the student to admin or demote if already admin; don't do if it's self 
-  console.log(id);
-  console.log(locals.user.id);
   if (id == locals.user.id) {
     return json({ success: false, message: 'Non puoi cambiare il tuo stesso stato!' });
   }

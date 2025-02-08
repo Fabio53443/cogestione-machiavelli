@@ -67,26 +67,33 @@
               </tr>
             </thead>
             <tbody>
-              {#each corso.schedule[dayIndex] as hourSeats, timeIndex}
+              {#each Array(Math.floor(corso.schedule[dayIndex].length / corso.length)) as _, groupIndex}
+                <!-- Compute starting index for the group -->
                 <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
-                  <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
+                  <td class="py-3 font-semibold pl-4">
+                    {#if corso.length > 1}
+                      {(groupIndex * corso.length) + 1}° - {(groupIndex * corso.length) + corso.length}°
+                    {:else}
+                      {(groupIndex * corso.length) + 1}°
+                    {/if}
+                  </td>
                   <td class="py-3">
                     <div class="flex items-center gap-4">
                       <div class="text-base whitespace-nowrap">
-                        {(corso.numPosti - (hourSeats ?? 0))}/{corso.numPosti}
+                        {(corso.numPosti - (corso.schedule[dayIndex][groupIndex * corso.length] ?? 0))}/{corso.numPosti}
                       </div>
                       <div class="relative flex-1 bg-gray-200 h-3 rounded">
                         <div
-                          class={`absolute top-0 left-0 h-3 rounded ${barColor((hourSeats ?? 0), corso.numPosti)}`}
-                          style="width: {(((hourSeats ?? 0) / corso.numPosti) * 100)}%;"
-                        />
+                          class={`absolute top-0 left-0 h-3 rounded ${barColor(corso.schedule[dayIndex][groupIndex * corso.length] ?? 0, corso.numPosti)}`}
+                          style="width: {(((corso.schedule[dayIndex][groupIndex * corso.length] ?? 0) / corso.numPosti) * 100)}%;"
+                        ></div>
                       </div>
                     </div>
                   </td>
                   <td class="py-3 text-right pr-7 pl-7">
                     <button
                       class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                      on:click={() => openAttendanceModal(dayIndex, timeIndex)}
+                      on:click={() => openAttendanceModal(dayIndex, groupIndex * corso.length)}
                     >
                       Presenze
                     </button>

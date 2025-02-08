@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { corsi, iscrizioni, professori } from '$lib/db/models.js';
 
 export async function load({ locals }) {
-  if (!locals.user) {
+  if (!locals.user || locals.user.tipo !== 'studente') {
     throw redirect(302, '/login');
   }
 

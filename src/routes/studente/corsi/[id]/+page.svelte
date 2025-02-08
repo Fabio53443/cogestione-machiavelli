@@ -2,9 +2,8 @@
   import Alert from '$lib/components/Alert.svelte';
   import { goto } from '$app/navigation';
   export let data;
-  const { corso, error, iscrizioni } = data;
-  let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
-
+  const { corso, error, iscrizioni, enrolmentDict } = data;
+  let days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
   let showAlert = false;
   let alertMessage = '';
   let alertType = '';
@@ -80,9 +79,7 @@
   }
 
   function isEnrolled(dayIndex, timeIndex) {
-    return iscrizioni?.some(iscrizione => 
-      iscrizione.giorno === dayIndex && iscrizione.ora === timeIndex && iscrizione.idCorso === corso.id
-    );
+    return enrolmentDict.some(item => item.day === dayIndex && item.hour === timeIndex);
   }
 
   function computeFreeSeats(dayIndex, timeIndex) {

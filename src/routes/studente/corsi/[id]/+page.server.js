@@ -1,5 +1,5 @@
 import { db } from '$lib/db/db.js';
-import { corsi } from '$lib/db/models.js';
+import { corsi, iscrizioni } from '$lib/db/models.js';
 import { eq } from 'drizzle-orm';
 
 export async function load({ params, locals }) {
@@ -18,6 +18,13 @@ export async function load({ params, locals }) {
     return { corso: null, error: 'Corso non trovato' };
   }
 
+  //get eventual enrolment of the student, array as it might be more than one; return both the day and hour index of the existing enrolment
+  const enrolment = await db.select().from(iscrizioni).where(eq(iscrizioni.idStudente, locals.user.id), eq(iscrizioni.idCorso, courseId));
+  //copy the array to a new one that only contains the day and hour as dictioanry
+  let enrolmentDict = [];
+  enrolment.forEach((enrol) => {
+    enrolmentDict.push({day: enrol.giorno, hour: enrol.ora});
+  });
   return {
     pageName: 'Dettagli del corso', 
     corso: {
@@ -31,6 +38,7 @@ export async function load({ params, locals }) {
       schedule: course.schedule,
       availability: course.availability,
     }, 
-    days: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato']
+    days: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+    enrolmentDict
   };
 }

@@ -156,7 +156,6 @@
             {student.studentName || 'N/A'}
           </div>
           <div class="col-span-2">
-            {student.classe || '—'}
           </div>
           <div class="col-span-4">
             {#if student.studentEmail}

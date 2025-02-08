@@ -33,7 +33,6 @@
                     nome,
                     email: fullEmail,
                     password,
-                    classe,
                 }),
             });
 
@@ -87,23 +86,6 @@
                 type="text"
                 name="nome"
                 placeholder="Nome utente"
-                required
-            />
-        </div>
-        <div class="mb-4">
-                
-            <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="nome"
-            >
-                Classe
-            </label>
-            <input
-                class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#EB3678]"
-                id="classe"
-                type="text"
-                name="classe"
-                placeholder="es. 4E"
                 required
             />
         </div>

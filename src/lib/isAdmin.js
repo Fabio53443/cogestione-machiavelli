@@ -11,7 +11,6 @@ export async function isAdmin(locals)
     const user = await db.select({
         admin: studenti.admin
     }).from(studenti).where(eq(studenti.id, locals.user.id));
-    console.log
     if (!user[0].admin ) {
         return false; 
     }

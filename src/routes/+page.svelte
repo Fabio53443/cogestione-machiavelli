@@ -9,7 +9,7 @@
         Benvenuto alla cogestione del Liceo Spallanzani
     </h1>
     <p class="text-xl mb-8 text-gray-300">
-        La piattaforma per la gestione dei corsi e delle prenotazioni. Segui <a href="https://instagram.com/rappresentanti_liceospalla"> @rappresentanti_liceospalla</a>per restare aggiornato! Accedi qui:<br /> 
+        La piattaforma per la gestione dei corsi e delle prenotazioni. Segui <a class="text-[#fb773c] " href="https://instagram.com/rappresentanti_liceospalla"> @rappresentanti_liceospalla</a> per restare aggiornato! Accedi qui:<br /> 
     </p>
 
 

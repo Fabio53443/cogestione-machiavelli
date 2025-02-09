@@ -109,7 +109,7 @@
             disabled={selectedStudents.size === 0}
             on:click={() => massUpdateAttendance(false)}
           >
-            Absent
+            Assente
           </button>
         </div>
         <button 
@@ -185,7 +185,7 @@
                 class:bg-green-500={student.presente}
                 class:bg-red-500={!student.presente}
               />
-              {student.presente ? 'Present' : 'Absent'}
+              {student.presente ? 'Presente' : 'Assente'}
             </button>
           </div>
         </div>

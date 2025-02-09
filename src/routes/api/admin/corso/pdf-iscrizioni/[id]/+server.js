@@ -28,6 +28,7 @@ export async function GET({ params, locals }) {
       // fields from iscrizioni
       giorno: iscrizioni.giorno,
       ora: iscrizioni.ora,
+      present: iscrizioni.presente,
       // fields from studenti
       nomeCompleto: studenti.nomeCompleto,
       email: studenti.email
@@ -70,10 +71,9 @@ export async function GET({ params, locals }) {
   for (const giorno of Object.keys(grouped).sort((a, b) => a - b)) {
     doc.fontSize(16).text(`Giorno: ${Number(giorno)+1}`);
     for (const ora of Object.keys(grouped[giorno]).sort((a, b) => a - b)) {
-      doc.fontSize(14).text(`  Turno: ${Number(ora)+1}`);
-      doc.fontSize(12).text("Nome -- Email", { underline: true });
+      doc.fontSize(10).text(`  Ora: ${Number(ora)+1}`);
       grouped[giorno][ora].forEach(item => {
-        doc.text(`    • ${item.nomeCompleto}  -- ${item.email}`);
+        doc.text(` • ${item.nomeCompleto}  -- ${item.email} -- ${item.present ? "Presente" : "Assente"}`);
       });
       doc.moveDown();
     }

@@ -5,7 +5,7 @@ import { corsi, iscrizioni, professori } from '$lib/db/models.js';
 
 export async function load({ locals }) {
   if (!locals.user || locals.user.role !== 'studente') {
-    throw redirect(302, '/login');
+    throw redirect(302, '/');
   }
 
   try {

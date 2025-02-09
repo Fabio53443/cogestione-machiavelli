@@ -231,7 +231,7 @@
                                     <td class="px-6 py-4 text-gray-700 ">{item.email}</td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <a href="/admin/docenti/{item.id}" class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded">
-                                            Iscrizioni
+                                            Impersona
                                         </a>
                                     </th>
                                     <th class="px-6 py-3 text-left text-gray-700 ">

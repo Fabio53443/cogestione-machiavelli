@@ -87,9 +87,9 @@
 
     <footer class="bg-gradient-to-r from-[#1e1e2e] via-[#181825] to-[#1e1e2e] text-[#cdd6f4] py-4 mt-auto">
         <div class="container mx-auto px-4 text-center text-sm">
-            Copyright &copy; 2025
+            Questo sito è <a href="https://github.com/Fabio53443/cogestione">open source</a> e sviluppato da
             <a
-                href="https://smartlinux.xyz"
+                href="https://github.com/Smartlinuxcoder"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-[#f5c2e7] hover:text-[#fab387] transition-all duration-300 hover:scale-105"
@@ -103,8 +103,7 @@
             >
                 Fabio53443
             </a>
-             
-            All rights reserved. <br> <a href="/admin">Admin</a>
+            <br> <a href="/admin">Admin</a>
         </div>
     </footer>
 </main>

@@ -24,7 +24,7 @@ export const POST = async ({ locals, request }) => {
         
         let schedule = [];
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
             if (availability.includes(i)) { 
             schedule.push(Array(4).fill(numPosti));
             } else {

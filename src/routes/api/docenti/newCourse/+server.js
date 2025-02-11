@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 import { db } from '$lib/db/db';
 import { corsi } from '$lib/db/models';
 import { eq } from 'drizzle-orm';
+import { isAdmin } from '$lib/isAdmin';
 import { SignJWT } from 'jose';
 import { TextEncoder } from 'util';
 import bcrypt from 'bcrypt';
@@ -9,7 +10,7 @@ import bcrypt from 'bcrypt';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export const POST = async ({ locals, request }) => {
-    if (!locals.user || locals.user.role !== 'docente') {
+    if (!locals.user || locals.user.role !== 'docente' && !isAdmin(locals.user)) {
         return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }
     try {

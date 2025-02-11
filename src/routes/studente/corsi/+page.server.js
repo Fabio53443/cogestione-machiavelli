@@ -53,7 +53,8 @@ export async function load({ locals }) {
         docenteNome: `${docente.nome} ${docente.cognome}`,
         iscritto: enrolledCourseIds.includes(corso.id),
         giorno: enrolledInfo?.giorno ?? null,
-        ora: enrolledInfo?.ora ?? null
+        ora: enrolledInfo?.ora ?? null,
+        availability: corso.availability // Add this line
       };
     });
 

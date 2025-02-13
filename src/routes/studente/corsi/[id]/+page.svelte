@@ -142,7 +142,7 @@
               </tr>
             </thead>
             <tbody>
-              {#each Array(4 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
+              {#each Array(7 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="p-4 border-b border-gray-200 font-medium">
                     {#if corso.length > 1}

@@ -45,13 +45,13 @@ export const corsi = pgTable("corsi", {
     .array()
     .default(
       sql`ARRAY[
-      ARRAY[0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0], 
-      ARRAY[0, 0, 0, 0]
+      ARRAY[0, 0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0, 0], 
+      ARRAY[0, 0, 0, 0, 0, 0, 0]
 ]::integer[][]`
-    ),
+    ),  
 });
 
 export const iscrizioni = pgTable("iscrizioni", {

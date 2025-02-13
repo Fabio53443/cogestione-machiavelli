@@ -26,9 +26,9 @@ export const POST = async ({ locals, request }) => {
 
         for (let i = 0; i < 5; i++) {
             if (availability.includes(i)) { 
-            schedule.push(Array(4).fill(numPosti));
+            schedule.push(Array(7).fill(numPosti));
             } else {
-            schedule.push(Array(4).fill(0));
+            schedule.push(Array(7).fill(0));
             }
         }
         await db.insert(corsi).values({

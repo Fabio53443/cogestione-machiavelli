@@ -52,13 +52,14 @@ export const POST = async ({ locals, request }) => {
 };
 
 export const PUT = async ({ locals, request }) => {
-    if (!locals.user || locals.user.role !== 'docente') {
+    
+    if (!locals.user || locals.user.role !== 'docente' && !isAdmin(locals.user)) {
         return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }
     try {
-        const { id, nome, descrizione, aula, numPosti, length, availability } = await request.json();
-        if (!id || !nome || !descrizione || !aula || !numPosti || !length || !availability) {
-            return json({ success: false, message: 'All fields are required.' }, { status: 400 });
+        const { id, nome, descrizione, aula } = await request.json();
+        if (!id) {
+            return json({ success: false, message: 'Some fields are required.' }, { status: 400 });
         }
         await db.update(corsi)
             .set({ nome, descrizione, aula, numPosti, postiDisponibili: numPosti, length, availability })

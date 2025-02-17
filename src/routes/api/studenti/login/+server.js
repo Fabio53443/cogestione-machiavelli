@@ -34,7 +34,7 @@ export const POST = async ({ request }) => {
             const token = await new SignJWT({ username, id , role: 'studente', nome_completo })
                 .setProtectedHeader({ alg: 'HS256' })
                 .setIssuedAt()
-                .setExpirationTime('1h')
+                .setExpirationTime('36h')
                 .sign(secret);
             return json({ success: true, token });
 

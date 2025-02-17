@@ -69,7 +69,7 @@
               {#each dayCourses.sort((a, b) => a.ora - b.ora) as corso (corso.uniqueKey)}
                 <li class="border rounded-lg p-4 hover:shadow-md transition duration-200 relative">
                   <div class="absolute top-2 right-3">
-                    <span class="text-2xl font-bold text-green-500">{corso.ora + 1}°</span>
+                    <span class="text-2xl font-bold text-green-500">{corso.ora + 2}°</span>
                   </div>
                   <div class="pr-16"> <!-- Add padding-right to prevent text overlap with hour -->
                     <h5 class="text-lg font-semibold text-[#FB773C] mb-2">{corso.nome}</h5>

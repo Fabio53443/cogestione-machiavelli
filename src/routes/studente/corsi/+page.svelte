@@ -124,7 +124,7 @@
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700 mb-4">
                                 <p><span class="font-semibold">Aula:</span> {corso.aula}</p>
-                                <p><span class="font-semibold">Durata:</span> 2h</p>
+                                <p><span class="font-semibold">Durata:</span> {corso.length} ore</p>
                                 <p><span class="font-semibold">Giorni:</span> {corso.availability.map(d => days[d]).join(', ')}</p>
                             </div>
                             <div class="flex justify-end">

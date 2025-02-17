@@ -72,9 +72,9 @@
                 <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
                   <td class="py-3 font-semibold pl-4">
                     {#if corso.length > 1}
-                      {(groupIndex * corso.length) + 1}° - {(groupIndex * corso.length) + corso.length}°
+                      {(groupIndex * corso.length) + 2}° - {(groupIndex * corso.length) + corso.length}°
                     {:else}
-                      {(groupIndex * corso.length) + 1}°
+                      {(groupIndex * corso.length) + 2}°
                     {/if}
                   </td>
                   <td class="py-3">

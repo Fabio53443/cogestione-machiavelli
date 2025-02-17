@@ -121,7 +121,7 @@
         </div>
         <div class="space-y-3">
           <h3 class="font-semibold text-gray-700">Durata</h3>
-          <p class="text-gray-600">2 ore</p>
+          <p class="text-gray-600">{corso.length} ore</p>
         </div>
       </div>
     </div>
@@ -142,13 +142,13 @@
               </tr>
             </thead>
             <tbody>
-              {#each Array(7 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
+              {#each Array(5 - corso.length + 1).fill(0).map((_, i) => i).filter(i => i % corso.length === 0) as timeIndex}
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="p-4 border-b border-gray-200 font-medium">
                     {#if corso.length > 1}
-                      {timeIndex+1}° - {timeIndex + corso.length}°
+                      {timeIndex+2}° - {timeIndex+1 + corso.length}°
                     {:else}
-                      {timeIndex + 1}°
+                      {timeIndex + 2}°
                     {/if}
                   </td>
                   {#each days as _, dayIndex}

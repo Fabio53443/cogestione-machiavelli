@@ -95,7 +95,7 @@
             <tbody>
               {#each corso.schedule[dayIndex] as hourSeats, timeIndex}
                 <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
-                  <td class="py-3 font-semibold pl-4">{timeIndex + 1}°</td>
+                  <td class="py-3 font-semibold pl-4">{timeIndex + 2}°</td>
                   <td class="py-3">
                     <div class="flex items-center gap-4">
                       <div class="text-base whitespace-nowrap">

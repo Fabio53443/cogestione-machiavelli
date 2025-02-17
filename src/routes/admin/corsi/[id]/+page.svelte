@@ -9,6 +9,7 @@
   let selectedStudents = [];
   let currentHour;
   let currentDay;
+  let selectedHours = [];
 
   function barColor(free, total) {
     return free === 0 ? 'bg-red-500' : 'bg-green-500';
@@ -54,6 +55,40 @@
         }
         
   }
+
+  async function fillSelectedHours() {
+    if (!confirm("Vuoi veramente riempire tutte le ore selezionate?")) {
+      return;
+    }
+
+    try {
+      for (const { dayIndex, timeIndex } of selectedHours) {
+        await fetch(`/api/admin/corso/presenze-forcefull`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: corso.id, dayIndex, timeIndex }),
+        });
+      }
+      location.reload();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function toggleHourSelection(dayIndex, timeIndex) {
+    const hourKey = { dayIndex, timeIndex };
+    const index = selectedHours.findIndex(
+      h => h.dayIndex === dayIndex && h.timeIndex === timeIndex
+    );
+    
+    if (index === -1) {
+      selectedHours = [...selectedHours, hourKey];
+    } else {
+      selectedHours = selectedHours.filter((_, i) => i !== index);
+    }
+  }
 </script>
 
 {#if error}
@@ -78,6 +113,15 @@
 
   
   {#if corso.schedule && corso.availability}
+    <div class="mb-4">
+      <button
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 disabled:bg-gray-400"
+        on:click={fillSelectedHours}
+        disabled={selectedHours.length === 0}
+      >
+        Riempi ore selezionate ({selectedHours.length})
+      </button>
+    </div>
 
     {#each days as day, dayIndex}
       {#if corso.availability.includes(dayIndex)}
@@ -86,6 +130,7 @@
       <table class="w-full text-base">
             <thead>
               <tr>
+                <th class="py-3 w-12 text-left pl-4 text-black">Sel.</th>
                 <th class="py-3 w-24 text-left pl-4 text-black">Turno</th>
                 <th class="py-3 text-left text-black">Posti occupati</th>
                 <th class="py-3 w-24 text-center pr-4 text-black">Azioni</th>
@@ -95,6 +140,14 @@
             <tbody>
               {#each corso.schedule[dayIndex] as hourSeats, timeIndex}
                 <tr class="hover:bg-black-100 hover:bg-opacity-20 transition-colors text-black">
+                  <td class="py-3 pl-4">
+                    <input
+                      type="checkbox"
+                      checked={selectedHours.some(h => h.dayIndex === dayIndex && h.timeIndex === timeIndex)}
+                      on:change={() => toggleHourSelection(dayIndex, timeIndex)}
+                      class="w-4 h-4"
+                    />
+                  </td>
                   <td class="py-3 font-semibold pl-4">{timeIndex + 2}°</td>
                   <td class="py-3">
                     <div class="flex items-center gap-4">

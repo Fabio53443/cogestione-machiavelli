@@ -1,7 +1,7 @@
 
-export function load() {
-  return {
-    pageName: 'Registrazione', 
-  };
+import { redirect } from '@sveltejs/kit';
 
+export function load() {
+  return redirect(302, '/docenti/dashboard');
 }
+

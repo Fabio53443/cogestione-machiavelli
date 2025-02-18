@@ -47,13 +47,6 @@
                 </div>
                 {#if !user}
                     <nav class="flex space-x-4">
-                        <a
-                            href="/docenti"
-                            class="flex items-center text-[#cdd6f4] hover:text-[#f5c2e7] transition-all duration-300 text-lg hover:scale-105"
-                            >Organizzatori <UserSettingsOutline
-                                class="w-5 h-5 ml-1"
-                            />
-                        </a>
 
                         <a
                             href="/login"

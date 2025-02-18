@@ -15,7 +15,7 @@ export async function GET({ url }) {
     access_type: 'offline',
     prompt: 'consent',
     scope: ['profile', 'email'],
-    hd: 'spallanzanitivoli.edu.it'
+    hd: 'spallanzanitivoli.edu.it',
   });
   throw redirect(302, authorizeUrl);
 }

@@ -13,11 +13,18 @@
     const days = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì'];
     let selectedDays = new Set();
     let isDropdownOpen = false;
+    let searchQuery = '';
 
-    $: filteredCorsi = selectedDays.size === 0
-        ? corsi
-        : corsi.filter(corso => corso.availability.some(day => selectedDays.has(day)));
-        
+    $: filteredCorsi = corsi
+        .filter(corso => {
+            const matchesDays = selectedDays.size === 0 || 
+                corso.availability.some(day => selectedDays.has(day));
+            const matchesSearch = searchQuery === '' || 
+                corso.nome.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                corso.descrizione.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesDays && matchesSearch;
+        });
+
     const toggleDay = (index) => {
         if (selectedDays.has(index)) {
             selectedDays.delete(index);
@@ -53,8 +60,23 @@
         </div>
 
         <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-            <div class="flex justify-end mb-6">
-                <div class="flex flex-col items-end">
+            <div class="flex flex-col md:flex-row justify-between gap-4 mb-6">
+                <!-- Search Bar -->
+                <div class="flex-1">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="search">
+                        Cerca corso
+                    </label>
+                    <input
+                        type="text"
+                        id="search"
+                        bind:value={searchQuery}
+                        placeholder="Cerca per nome o descrizione..."
+                        class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:border-[#FB773C] focus:outline-none transition-colors duration-200"
+                    />
+                </div>
+
+                <!-- Day Filter -->
+                <div class="flex flex-col items-stretch md:items-end">
                     <label class="block text-gray-700 text-sm font-bold mb-2">
                         Filtra per giorno
                     </label>

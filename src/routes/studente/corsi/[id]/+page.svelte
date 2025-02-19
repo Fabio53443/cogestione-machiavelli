@@ -97,14 +97,8 @@
   }
 
   function getEnrollmentStatus(dayIndex, timeIndex) {
-
-    console.log('dayIndex', dayIndex);
-    console.log('timeIndex', timeIndex);
-    console.log('corso', corso);
-    console.log('enrolmentDict', enrolmentDict);
     // First check if enrolled in this course
     if (enrolmentDict.find(item => item.day === dayIndex && item.hour === timeIndex && item.id === corso.id)) {
-      console.log('enrolled');
       return 'enrolled';
       
     }
@@ -119,7 +113,6 @@
     
     // If there's a conflict and it's not with the current course
     if (conflictingEnrollment && conflictingEnrollment.idCorso !== corso.id) {
-      console.log ('conflict');
       return 'conflict';
     }
     

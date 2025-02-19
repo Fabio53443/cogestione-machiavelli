@@ -70,7 +70,6 @@ export const DELETE = async ({ request, locals }) => {
   
   try {
     const { id } = await request.json();
-    console.log(id);
     //delete all related iscrizioni for courses taught by the teacher
     const corsiDocente = await db.select().from(corsi).where(eq(corsi.docente, id));
     for (const corso of corsiDocente) {

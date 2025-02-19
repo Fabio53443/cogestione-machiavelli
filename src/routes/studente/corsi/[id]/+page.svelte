@@ -79,7 +79,7 @@
   }
 
   function isEnrolled(dayIndex, timeIndex) {
-    return enrolmentDict.some(item => item.day === dayIndex && item.hour === timeIndex);
+    return enrolmentDict.some(item => item.day === dayIndex && item.hour === timeIndex && item.idCorso === corso.id);
   }
 
   function computeFreeSeats(dayIndex, timeIndex) {

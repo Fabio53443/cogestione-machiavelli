@@ -23,7 +23,7 @@ export async function load({ params, locals }) {
   //copy the array to a new one that only contains the day and hour as dictioanry
   let enrolmentDict = [];
   enrolment.forEach((enrol) => {
-    enrolmentDict.push({day: enrol.giorno, hour: enrol.ora});
+    enrolmentDict.push({day: enrol.giorno, hour: enrol.ora, id: enrol.idCorso});
   });
   return {
     pageName: 'Dettagli del corso', 

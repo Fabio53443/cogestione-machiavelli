@@ -78,10 +78,6 @@
     return true;
   }
 
-  function isEnrolled(dayIndex, timeIndex) {
-    return enrolmentDict.some(item => item.day === dayIndex && item.hour === timeIndex && item.idCorso === corso.id);
-  }
-
   function computeFreeSeats(dayIndex, timeIndex) {
     let usedSeats = 0;
     for (let i = 0; i < corso.length; i++) {
@@ -98,6 +94,40 @@
     if (percentage > 66) return 'text-green-600';
     if (percentage > 33) return 'text-orange-500';
     return 'text-red-500';
+  }
+
+  function getEnrollmentStatus(dayIndex, timeIndex) {
+
+    console.log('dayIndex', dayIndex);
+    console.log('timeIndex', timeIndex);
+    console.log('corso', corso);
+    console.log('enrolmentDict', enrolmentDict);
+    // First check if enrolled in this course
+    if (enrolmentDict.find(item => item.day === dayIndex && item.hour === timeIndex && item.id === corso.id)) {
+      console.log('enrolled');
+      return 'enrolled';
+      
+    }
+    
+    // Then check if enrolled in any other course at this time or in the timeslot if it's a multihour course
+    const conflictingEnrollment = enrolmentDict.find(item => {
+      if (corso.length > 1) {
+        return item.day === dayIndex && item.hour >= timeIndex && item.hour < timeIndex + corso.length;
+      }
+      return item.day === dayIndex && item.hour === timeIndex;
+    });
+    
+    // If there's a conflict and it's not with the current course
+    if (conflictingEnrollment && conflictingEnrollment.idCorso !== corso.id) {
+      console.log ('conflict');
+      return 'conflict';
+    }
+    
+    if (computeFreeSeats(dayIndex, timeIndex) === 0) {
+      return 'full';
+    }
+    
+    return 'available';
   }
 </script>
 
@@ -164,21 +194,25 @@
                             </span>
                             <button
                               class={`px-2 sm:px-4 py-1 sm:py-2 text-sm rounded-lg font-medium transition-colors w-full sm:w-auto
-                                ${isEnrolled(dayIndex, timeIndex) 
-                                  ? 'bg-green-500 hover:bg-red-500 text-white group' 
-                                  : computeFreeSeats(dayIndex, timeIndex) === 0
-                                    ? 'bg-gray-300 cursor-not-allowed'
-                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                ${
+                                  {
+                                    'enrolled': 'bg-green-500 hover:bg-red-500 text-white group',
+                                    'conflict': 'bg-orange-500 text-white cursor-not-allowed',
+                                    'full': 'bg-gray-300 cursor-not-allowed',
+                                    'available': 'bg-blue-500 hover:bg-blue-600 text-white'
+                                  }[getEnrollmentStatus(dayIndex, timeIndex)]
                                 }`}
-                              on:click={() => isEnrolled(dayIndex, timeIndex) 
+                              on:click={() => getEnrollmentStatus(dayIndex, timeIndex) === 'enrolled'
                                 ? unenroll(dayIndex, timeIndex) 
                                 : enroll(dayIndex, timeIndex)}
-                              disabled={computeFreeSeats(dayIndex, timeIndex) === 0}
+                              disabled={!['enrolled', 'available'].includes(getEnrollmentStatus(dayIndex, timeIndex))}
                             >
-                              {#if isEnrolled(dayIndex, timeIndex)}
+                              {#if getEnrollmentStatus(dayIndex, timeIndex) === 'enrolled'}
                                 <span class="group-hover:hidden">✓</span>
                                 <span class="hidden group-hover:inline">Disiscriviti</span>
-                              {:else if computeFreeSeats(dayIndex, timeIndex) === 0}
+                              {:else if getEnrollmentStatus(dayIndex, timeIndex) === 'conflict'}
+                                -
+                              {:else if getEnrollmentStatus(dayIndex, timeIndex) === 'full'}
                                 N/D
                               {:else}
                                 Iscriviti

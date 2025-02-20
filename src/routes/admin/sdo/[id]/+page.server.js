@@ -1,11 +1,11 @@
 import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/db/db.js';
 import { eq } from 'drizzle-orm';
-import { isAdmin } from '$lib/isAdmin.js';
+import { isSdo } from '$lib/isAdmin.js';
 import { corsi, iscrizioni, professori, studenti } from '$lib/db/models.js';
 
 export async function load({ locals, params }) {
-    if (!(await isSdO(locals) || !(await isAdmin(locals)))) {
+    if (!(await isSdO(locals))) {
         throw redirect(302, '/studente/dashboard');
     }
 

@@ -3,6 +3,7 @@
     let listData = [];
     let loading = false;
     let error = null;
+    let selectedCourses = [];
 
     async function fetchData(type) {
         loading = true;
@@ -122,8 +123,45 @@
             error = e.message;
         }        
     }
-    
 
+    async function downloadSelectedIscrizioni() {
+        if (selectedCourses.length === 0) {
+            alert("Seleziona almeno un corso");
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/admin/corso/pdf-iscrizioni-bulk`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ courseIds: selectedCourses }),
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                error = errorData.message || "Download failed";
+                return;
+            }
+
+            // Get the filename from the Content-Disposition header
+            const filename = response.headers.get('Content-Disposition')?.split('filename=')[1] || 'iscrizioni_corsi.zip';
+            
+            // Create a blob from the binary data
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (e) {
+            error = e.message;
+        }
+    }
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -158,9 +196,32 @@
             </div>
         {:else if activeView && listData.length > 0}
             <div class="overflow-x-auto text-gray-700">
+                {#if activeView === 'courses' && selectedCourses.length > 0}
+                    <div class="mb-4">
+                        <button
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                            on:click={downloadSelectedIscrizioni}>
+                            Scarica iscrizioni selezionate ({selectedCourses.length})
+                        </button>
+                    </div>
+                {/if}
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-100">
                         <tr>
+                            {#if activeView === 'courses'}
+                                <th class="px-6 py-3 text-left text-gray-700">
+                                    <input
+                                        type="checkbox"
+                                        on:change={(e) => {
+                                            if (e.target.checked) {
+                                                selectedCourses = listData.map(item => item.id);
+                                            } else {
+                                                selectedCourses = [];
+                                            }
+                                        }}
+                                    />
+                                </th>
+                            {/if}
                             <th class="px-6 py-3 text-left text-gray-700">ID</th>
                             <th class="px-6 py-3 text-left text-gray-700">Nome</th>
                             {#if activeView === 'students'}
@@ -187,6 +248,21 @@
                     <tbody>
                         {#each listData as item}
                             <tr class="border-t hover:bg-gray-50">
+                                {#if activeView === 'courses'}
+                                    <td class="px-6 py-4">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedCourses.includes(item.id)}
+                                            on:change={(e) => {
+                                                if (e.target.checked) {
+                                                    selectedCourses = [...selectedCourses, item.id];
+                                                } else {
+                                                    selectedCourses = selectedCourses.filter(id => id !== item.id);
+                                                }
+                                            }}
+                                        />
+                                    </td>
+                                {/if}
                                 <td class="px-6 py-4 text-gray-700">{item.id}</td>
                                 <td class="px-6 py-4 text-gray-700">{item.nomeCompleto || item.nome}</td>
                                 {#if activeView === 'students'}

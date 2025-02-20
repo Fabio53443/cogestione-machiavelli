@@ -4,6 +4,8 @@ import { iscrizioni, corsi } from '$lib/db/models';
 import { eq, and } from 'drizzle-orm';
 
 export const POST = async ({ locals, request }) => {
+
+  return json({ success: false, message: 'Non si possono più modificare le iscrizioni.' }, { status: 401 });
   try {
     if (!locals.user || locals.user.role !== 'studente') {
       return json({ success: false, message: 'Unauthorized.' }, { status: 401 });
@@ -65,6 +67,7 @@ export const POST = async ({ locals, request }) => {
 };
 
 export const DELETE = async ({ locals, request }) => {
+  return json({ success: false, message: 'Non si possono più modificare le iscrizioni.' }, { status: 401 });
   try {
     if (!locals.user || locals.user.role !== 'studente') {
       return json({ success: false, message: 'Unauthorized.' }, { status: 401 });

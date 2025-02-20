@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/db/db.js';
 import { eq } from 'drizzle-orm';
-import { isSdo } from '$lib/isAdmin.js';
+import { isSdO } from '$lib/isAdmin.js';
 import { corsi, iscrizioni, professori, studenti } from '$lib/db/models.js';
 
 export async function load({ locals, params }) {

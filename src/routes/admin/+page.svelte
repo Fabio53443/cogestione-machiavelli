@@ -287,7 +287,7 @@
                                         <button
                                             class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded"
                                             on:click={() => adminStatus(item.id)}>
-                                            {item.sdo ? "Rimuovi da admin" : "Promuovi"}
+                                            {item.sdo ? "Rimuovi da SdO" : "Promuovi a SdO"}
                                         </button>
                                     </th>
                                     <th class="px-6 py-3 text-left text-gray-700 ">

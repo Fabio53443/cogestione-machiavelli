@@ -43,7 +43,8 @@ async function generateCoursePDF(course, iscrizioniRows) {
         for (const giorno of Object.keys(grouped).sort()) {
             doc.fontSize(16).text(`Giorno: ${Number(giorno)+1}`);
             for (const ora of Object.keys(grouped[giorno]).sort()) {
-                doc.fontSize(10).text(`  Ora: ${Number(ora)+1}`);
+                const numIscritti = grouped[giorno][ora].length;
+                doc.fontSize(10).text(`  Ora: ${Number(ora)+2} - Iscritti: ${numIscritti}/${course.numPosti || "N/A"}`);
                 grouped[giorno][ora].forEach(item => {
                     doc.text(` • ${item.nomeCompleto}  -- ${item.email}`);
                 });

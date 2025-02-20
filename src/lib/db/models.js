@@ -23,6 +23,7 @@ export const studenti = pgTable("studenti", {
   hashedPass: text("hashed_pass").notNull(),
   googleId: text("google_id").notNull().unique(),
   admin: boolean("admin").notNull().default(false),
+  sdo: boolean("sdo").notNull().default(false),
 });
 
 export const corsi = pgTable("corsi", {

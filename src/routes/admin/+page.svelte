@@ -25,7 +25,7 @@
 
     async function adminStatus(id) {
         try {
-            const response = await fetch(`/api/admin/admin-status`, {
+            const response = await fetch(`/api/admin/sdo`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -227,7 +227,13 @@
                             {#if activeView === 'students'}
                                 <th class="px-6 py-3 text-left text-gray-700">Email</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Admin</th>
+                                <th class="px-6 py-3 text-left text-gray-700">SdO</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Gestisci</th>
+                                <th class="px-6 py-3 text-left text-gray-700">
+                                    <a href="/admin/sdo" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                        Corsi
+                                    </a>
+                                </th>
                             {:else if activeView === 'courses'}
                                 <th class="px-6 py-3 text-left text-gray-700">Aula</th>
                                 <th class="px-6 py-3 text-left text-gray-700">Gestisci</th>
@@ -272,12 +278,24 @@
                                             {item.admin ? "Yes" : "No"}
                                         </span>
                                     </td>
+                                    <td class="px-6 py-4 text-gray-700">
+                                        <span class={item.sdo ? "text-green-600" : "text-red-600"}>
+                                            {item.sdo ? "Yes" : "No"}
+                                        </span>
+                                    </td>
                                     <th class="px-6 py-3 text-left text-gray-700 ">
                                         <button
                                             class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded"
                                             on:click={() => adminStatus(item.id)}>
-                                            {item.admin ? "Rimuovi da admin" : "Promuovi"}
+                                            {item.sdo ? "Rimuovi da admin" : "Promuovi"}
                                         </button>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-gray-700 ">
+                                        <a
+                                            class="bg-[#FB773C] hover:bg-[#EB3678] text-white font-bold py-2 px-4 rounded"
+                                            href="/admin/sdo/{item.id}">
+                                            Corsi
+                                    </a>
                                     </th>
                                 {:else if activeView === 'courses'}
                                     <td class="px-6 py-4 text-gray-700">{item.aula}</td>

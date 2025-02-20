@@ -18,3 +18,19 @@ export async function isAdmin(locals)
     return true; 
     
 }
+export async function isSdO(locals) 
+{
+    if (!locals.user) {
+        return false;
+    }  
+    
+    const user = await db.select({
+        sdo: studenti.sdo
+    }).from(studenti).where(eq(studenti.id, locals.user.id));
+    if (!user[0].sdo ) {
+        return false; 
+    }
+
+    return true; 
+    
+}

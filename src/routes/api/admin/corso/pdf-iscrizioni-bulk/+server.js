@@ -16,15 +16,15 @@ function sanitizeFilename(filename) {
 async function generateCoursePDF(course, iscrizioniRows) {
     return new Promise((resolve, reject) => {
         const chunks = [];
-        const doc = new PDFDocument({ bufferPages: false, size: 'A4' });
+        const doc = new PDFDocument({ bufferPages: false, size: 'A4', margins: { top: 20, left: 20, right: 20, bottom: 20 } });
 
         doc.on('data', chunks.push.bind(chunks));
         doc.on('end', () => resolve(Buffer.concat(chunks)));
         doc.on('error', reject);
 
-        doc.fontSize(18).text(sanitizeFilename(course.nome), { underline: true });
+        doc.fontSize(14).text(sanitizeFilename(course.nome), { underline: true });
         doc.moveDown();
-        doc.fontSize(12).text(`Descrizione: ${course.descrizione || "N/A"}`);
+        doc.fontSize(10).text(`Descrizione: ${course.descrizione || "N/A"}`);
         doc.text(`Aula: ${course.aula || "N/A"}`);
         doc.text(`Capienza: ${course.numPosti || "N/A"}`);
         doc.moveDown();
@@ -41,10 +41,10 @@ async function generateCoursePDF(course, iscrizioniRows) {
         });
 
         for (const giorno of Object.keys(grouped).sort()) {
-            doc.fontSize(16).text(`Giorno: ${Number(giorno)+1}`);
+            doc.fontSize(12).text(`Giorno: ${Number(giorno)+1}`);
             for (const ora of Object.keys(grouped[giorno]).sort()) {
                 const numIscritti = grouped[giorno][ora].length;
-                doc.fontSize(10).text(`  Ora: ${Number(ora)+2} - Iscritti: ${numIscritti}/${course.numPosti || "N/A"}`);
+                doc.fontSize(8).text(`  Ora: ${Number(ora)+2} - Iscritti: ${numIscritti}/${course.numPosti || "N/A"}`);
                 grouped[giorno][ora].forEach(item => {
                     doc.text(` • ${item.nomeCompleto}  -- ${item.email}`);
                 });
